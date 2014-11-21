@@ -278,4 +278,5 @@ module.exports = (grunt) ->
         grunt.task.run ["clean:server", "concurrent:server", "connect:livereload", "open", "watch"]
 
     grunt.registerTask "build", ["clean:dist", "useminPrepare", "concurrent:dist", "copy:dist", "concat", "uglify", "usemin"]
+    grunt.registerTask "heroku", ["build"]
     grunt.registerTask "default", ["server"]
