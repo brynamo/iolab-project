@@ -1,0 +1,58 @@
+<div class="page page-general page-course-filter">
+
+	<!-- Question 1 -->
+		<div class="main-filter panel panel-default mini-box col-md-8 col-md-offset-2 visible" ng-class="{'selected':currentStep>1}">
+			<div class="col-sm-1"><span class="box-icon">1</span></div>
+	        <div class="box-info col-sm-11">
+	        	<h1 class="col-sm-7">What do you want to learn?</h1>
+	        	<div class="col-sm-5">
+	                <div class="ui-select">
+	                    <select ng-model="courseFilter.domain" ng-options="topic.name for topic in topics track by topic.name">
+	                        <option value="">Show all</option>
+	                    </select>
+	                </div>
+	            </div>
+	        </div>
+		</div>
+
+	<!-- Question 2 -->
+	<div class="main-filter panel panel-default mini-box col-md-8 col-md-offset-2" ng-class="{'selected':currentStep>2, 'visible':currentStep>1}">
+		<div class="col-sm-1"><span class="box-icon">2</span></div>
+        <div class="box-info col-sm-11">
+        	<h1 class="col-sm-7">Anything specific?</h1>
+        	<div class="col-sm-5">
+                <div class="ui-select">
+                    <select ng-model="courseFilter.topic" ng-options="topic.name for topic in topics track by topic.name">
+                        <option value="">Show all</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+	</div>
+
+	<!-- Question 3 -->
+	<div class="main-filter panel panel-default mini-box col-md-8 col-md-offset-2" ng-class="{'visible':currentStep>2}">
+		<div class="col-sm-1"><span class="box-icon">3</span></div>
+        <div class="box-info col-sm-11">
+        	<h1 class="col-sm-7">What is your skill level?</h1>
+        	<div class="col-sm-5">
+                <div class="ui-select">
+                    <select ng-model="courseFilter.level" ng-options="topic.name for topic in topics track by topic.name">
+                        <option value="">Show all</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+	</div>
+
+
+
+</div>
+<footer class="course-filter-footer">
+	<div class="footer-logo">
+		{{main.brand}}
+	</div>
+	<div class="footer-body">
+		<p>Footer content here</p>
+	</div>
+</footer>

@@ -1,0 +1,246 @@
+h3.max-lines-3 {
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  height: $font-size-h3*$headings-line-height*3; /* Fallback for non-webkit */
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.course-catalog {
+
+  .panel-label {
+    padding-top:10px;
+    padding-bottom:10px;
+    text-transform: uppercase;
+  }
+
+  .icon-bg-container {
+    position: relative;
+    .icon {
+      opacity:0.5;
+    }
+    .icon-overlay {
+      position: absolute;
+      top:0;
+      left:0;
+      right:0;
+      color:$gray-dark;
+    }
+  }
+
+  .filters {
+    .panel-item {
+      padding: 15px 20px 0;
+    }
+    .panel-left {
+      width:80px;
+    }
+    .panel-right {
+      width:auto;
+    }
+  }
+
+  .panel-box {
+    cursor:pointer;
+  }
+
+  .panel-box ul.list-justified > li {
+    padding: 0 10px;
+
+    &.text-label {
+      vertical-align: middle;
+      line-height: $font-size-h3;
+    }
+    .btn {
+      vertical-align: super;
+    }
+  }
+
+  .course-box {
+    &.ng-enter, &.ng-move, &.ng-leave {
+      @include transition(all 0.5s ease-out);
+      overflow:hidden; 
+    }
+    &.ng-enter, &.ng-move, &.ng-leave.ng-leave-active {
+      opacity:0;
+      top:50px;
+    }
+    &.ng-enter.ng-enter-active, &.ng-move.ng-move-active, &.ng-leave {
+      opacity: 1;
+      top:0;
+    }
+  }
+}
+
+.panel-box {
+
+  $animation-time: 0.3s;
+
+  .panel-btn-group {
+
+    width:100%;
+    //margin-left:-5%;
+    margin-top: -75px;
+    position: relative;
+    height: 150px;
+
+    .panel-btn-container {
+      width: 50%;
+      
+      height: 50px;
+      line-height: 50px;
+      margin-top: 50px;
+      overflow:hidden;
+
+      
+
+      .panel-btn {
+        display: block;
+        border: 1px solid $brand-primary;
+        background: $reverse;
+        padding: 0 20px;
+        height:100%;
+        position: relative;
+        font-size:$font-size-h4;
+        opacity: 0;
+        cursor:pointer;
+        @include transition( all $animation-time ease-out);
+        &:hover {
+          background:$brand-primary;
+          color:$reverse;
+        }
+      }
+    }
+    .panel-btn-rotate {
+      @include rotate(-90deg);
+      @include transform-origin(50%, 75%);
+      @include transition(transform $animation-time ease-out);
+    }
+
+    .panel-btn-left {
+      float: left;
+      text-align: left;
+      @include border-left-radius($border-radius-base);
+      margin-left: -10px;
+      .panel-btn {
+        left:100%;
+      }
+    }
+
+    .panel-btn-right {
+      float:right;
+      text-align: right;
+      @include border-right-radius($border-radius-base);
+      margin-right: -10px;
+      .panel-btn {
+        left:-100%;
+      }
+    }
+
+    .panel-icon {
+      position: absolute;
+      left: 50%;
+      margin-left: -75px;
+      margin: 0 0 0 -75px;
+      z-index:1;
+    }
+  }
+
+  &:hover .panel-btn-group {
+    .panel-btn-rotate {
+      @include rotate(0deg);
+    }
+    .panel-btn {
+      left:0;
+      opacity:1;
+    }
+  } 
+}
+
+.page-course-filter {
+  padding-bottom: 50px;
+  background: url('../images/background/cal.jpg') no-repeat center center fixed; 
+  @include background-size(cover);
+
+  .main-filter {
+    display:none;
+    @include transition(all 0.5s ease-out);
+    margin-top: 0;
+    .box-icon {
+      margin-bottom: 0;
+      background:$brand-danger;
+      color:$reverse;
+    }
+    h1 {
+      margin-top: 12px;
+    }
+    .ui-select {
+      width:100%;
+      margin-top: 10px;
+      select {
+        font-size: 1.2em;
+      }
+    }
+    &.visible, &.visible-add {
+      display:block;
+    }
+    &.visible-add {
+      opacity: 0;
+    }
+    &.visible-add-active {
+      opacity: 1;
+    }
+    &.selected {
+      @include scale(0.8);
+      opacity: 0.75;
+      margin-top: -20px;
+
+      .box-icon {
+        background: $brand-success;
+      }
+    }
+
+  }
+}
+
+
+
+
+$footer-body-height: 75px;
+$footer-logo-height: 150px;
+$footer-logo-inset: -30px;
+$footer-height: $footer-logo-height + $footer-body-height + $footer-logo-inset;
+
+.page-course-filter {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -$footer-height;
+  padding-top: 40px;
+  
+
+  &:after {
+    content: "";
+    display: block;
+    height: $footer-height; 
+  }
+}
+.course-filter-footer {
+  height:$footer-height;
+
+  .footer-logo {
+    color:#414141;
+    font-size:$footer-logo-height;
+    line-height: $footer-logo-height;
+    margin-bottom: $footer-logo-inset;
+    text-align: center;
+  }
+  .footer-body {
+    background:#414141;
+    padding:15px;
+    color:$reverse;
+    text-align: center;
+    height:$footer-body-height;
+  }
+}
