@@ -1,6 +1,6 @@
 "use strict"
 LIVERELOAD_PORT = 35728
-lrSnippet = require("connect-livereload")(port: LIVERELOAD_PORT)
+# lrSnippet = require("connect-livereload")(port: LIVERELOAD_PORT)
 
 # var conf = require('./conf.'+process.env.NODE_ENV);
 mountFolder = (connect, dir) ->
@@ -62,6 +62,7 @@ module.exports = (grunt) ->
             livereload:
                 options:
                     middleware: (connect) ->
+                        lrSnippet = require("connect-livereload")(port: LIVERELOAD_PORT)
                         [lrSnippet, mountFolder(connect, ".tmp"), mountFolder(connect, yeomanConfig.app)]
 
             test:
