@@ -222,6 +222,7 @@ module.exports = (grunt) ->
                     dest: "<%= yeoman.dist %>"
                     src: [
                         "favicon.ico"
+                        "courses.json" # Hard-coded courses for mockup
                         # bower components that has image, font dependencies
                         "bower_components/font-awesome/css/*"
                         "bower_components/font-awesome/fonts/*"
