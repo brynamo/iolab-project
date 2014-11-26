@@ -60,7 +60,6 @@ angular.module('app.courses', [])
 	'$scope', 'courseFilter', 'Course', 'filterFilter', '$rootScope', 'logger'
 	($scope, courseFilter, Course, filterFilter, $rootScope, logger) -> 
 		$scope.courses = Course.query()
-		$scope.some_test = "TESTING"
 		
 		$scope.topics = courseFilter.getTopics()
 		$scope.courseFilter = courseFilter.getFilter()
