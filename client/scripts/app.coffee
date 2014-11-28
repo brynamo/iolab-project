@@ -45,6 +45,10 @@ angular.module('app', [
                 controller: 'courseBrowseCtrl'
             )
             .when(
+                '/course_detail'
+                templateUrl: 'views/courses/course_detail.html'
+            )
+            .when(
                 '/dashboard'
                 templateUrl: 'views/dashboard.html'
             )
