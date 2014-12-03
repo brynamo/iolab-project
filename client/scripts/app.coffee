@@ -47,6 +47,7 @@ angular.module('app', [
             .when(
                 '/course_detail'
                 templateUrl: 'views/courses/course_detail.html'
+                controller: 'courseDetailCtrl'
             )
             .when(
                 '/dashboard'

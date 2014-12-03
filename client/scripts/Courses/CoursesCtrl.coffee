@@ -79,3 +79,12 @@ angular.module('app.courses', [])
 			console.log("Filter", $scope.courseFilter.topic, selected)
 			return !selected || selected == course.rating
 ])
+
+.controller('courseDetailCtrl', [
+	'$scope', 'courseFilter', 'Course', 'filterFilter', '$rootScope', 'logger'
+	($scope, courseFilter, Course, filterFilter, $rootScope, logger) -> 
+		$scope.courses = Course.query()
+		$scope.some_test = "TESTING"
+		
+		$scope.title = "Some Course #1"
+])
