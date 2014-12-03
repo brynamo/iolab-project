@@ -76,7 +76,7 @@ app.get("/courses", function(req, res) {
 
 // Get subject for domain
 app.get("/domains/:domain_id/subjects", function(req, res) {
-	var domain_id = parseInt(req.params.domain_id, 10);
+	var domain_id = req.params.domain_id;
 	res.json( _.where(db.subjects, {domain_id: domain_id}));
 });
 
@@ -93,7 +93,7 @@ app.get("/:collection", function(req, res) {
 // Get specific entity
 app.get("/:collection/:entity", function(req, res) {
 	var collection = req.params.collection;
-	var entity = parseInt(req.params.entity, 10);
+	var entity = req.params.entity;
 
 	if (collection && entity && db[collection]) {
 		var object = _.findWhere(db[collection], {id:entity});

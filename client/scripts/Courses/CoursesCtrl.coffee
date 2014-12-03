@@ -80,10 +80,8 @@ angular.module('app.courses', [])
 ])
 
 .controller('courseDetailCtrl', [
-	'$scope', 'courseFilter', 'Course', 'filterFilter', '$rootScope', 'logger'
-	($scope, courseFilter, Course, filterFilter, $rootScope, logger) -> 
-		$scope.courses = Course.query()
-		$scope.some_test = "TESTING"
-		
-		$scope.title = "Some Course #1"
+	'$scope', '$routeParams', 'courseFilter', 'Course', 'filterFilter', '$rootScope', 'logger'
+	($scope, $routeParams, courseFilter, Course, filterFilter, $rootScope, logger) -> 
+		$scope.course = Course.get({id: $routeParams.courseId})
+		console.log("Course", $scope.course)		
 ])

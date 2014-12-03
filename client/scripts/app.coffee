@@ -45,7 +45,7 @@ angular.module('app', [
                 controller: 'courseBrowseCtrl'
             )
             .when(
-                '/course_detail'
+                '/courses/:courseId'
                 templateUrl: 'views/courses/course_detail.html'
                 controller: 'courseDetailCtrl'
             )
