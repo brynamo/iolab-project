@@ -9,7 +9,7 @@
                 <div class="form-group col-sm-4">
                     <label for="inputDomainSelect" class="control-label">Select Domain: </label>
                     <div class="ui-select">
-                        <select ng-model="courseFilter.domain" ng-options="topic.name for topic in topics track by topic.name">
+                        <select ng-model="courseFilter.domain" ng-options="domain.name for domain in filterOptions.domains track by domain.id">
                             <option value="">Show all</option>
                         </select>
                     </div>
@@ -17,7 +17,7 @@
                 <div class="form-group col-sm-4">
                     <label for="inputTopicSelect" class="control-label">Select Topic: </label>
                     <div class="ui-select">
-                        <select ng-model="courseFilter.topic" ng-options="topic.name for topic in topics track by topic.name">
+                        <select ng-model="courseFilter.subject" ng-options="subject.name for subject in filterOptions.subjects track by subject.id">
                             <option value="">Show all</option>
                         </select>
                     </div>
@@ -25,7 +25,7 @@
                 <div class="form-group col-sm-4">
                     <label for="inputTopicSelect" class="control-label">Select skill level: </label>
                     <div class="ui-select">
-                        <select ng-model="courseFilter.level" ng-options="topic.name for topic in topics track by topic.name">
+                        <select ng-model="courseFilter.level" ng-options="level.name for level in filterOptions.levels track by level.id">
                             <option value="">Show all</option>
                         </select>
                     </div>
@@ -37,19 +37,19 @@
 
     <section class="row">
 
-        <article class="course-box col-md-3" ng-repeat="course in courses | filter:filterTopics">
+        <article class="course-box col-md-3" ng-repeat="course in courses">
             <div class="panel panel-box">
-                <div class="panel-top panel-label color-{{topicColor(course.rating-1)}}">
-                    {{topicName(course.rating-1)}}
+                <div class="panel-top panel-label color-{{domainColor(course.subject_id)}}">
+                    {{subjectName(course.subject_id)}}
                 </div>
-                <div class="panel-heading bg-{{topicColor(course.rating-1)}}" >
-                    <h3 class="text-center max-lines-3">{{course.name}}</h3>
-                    <div class="divider divider-lg"></div>
-                    <div class="divider divider-lg"></div>
-                </div>
-                <div class="panel-btn-group">
-                    <div class="panel-icon bg-bright" ng-style="{'background-image':'url('+course.img+')', 'background-size':'cover'}">
+                    <div class="panel-heading bg-{{domainColor(course.subject_id)}}" >
+                        <h3 class="text-center max-lines-3"><a href="#/courses/{{course.id}}">{{course.name}}</a></h3>
+                        <div class="divider divider-lg"></div>
+                        <div class="divider divider-lg"></div>
                     </div>
+                <div class="panel-btn-group">
+                    <a href="#/courses/{{course.id}}" class="panel-icon bg-bright" ng-style="{'background-image':'url('+course.img+')', 'background-size':'cover'}">
+                    </a>
 
                     <div class="panel-btn-rotate clearfix">
                         <div class="panel-btn-container panel-btn-left">

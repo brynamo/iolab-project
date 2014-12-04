@@ -10,10 +10,22 @@
         <div class="row">
           <div id="course-detail" class="col-md-8">
             <p><img src="images/sample_course.jpg" class="img-responsive" alt="Course Video"></p>
-            <p><span class="label label-primary">Tag #1</span>
-              <span class="label label-primary">Tag #2</span>
-              <span class="label label-primary">Tag #3</span>
-            </p>
+
+            <div class="row">
+              <div class="col-md-8">
+                <span class="label label-primary">Tag #1</span>
+                <span class="label label-primary">Tag #2</span>
+                <span class="label label-primary">Tag #3</span>
+              </div>
+              <div class="col-md-4">
+                <rating class="ui-rating ui-rating-warning size-h3 pull-right"
+                        value="course.rating"
+                        max="5"
+                        min="0"
+                        state-on="'fa fa-star'"
+                        state-off="'fa fa-star-o'"></rating>
+              </div>
+            </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

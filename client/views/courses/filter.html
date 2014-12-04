@@ -1,17 +1,19 @@
 <div class="page page-general page-course-filter">
 
 	<!-- Question 1 -->
-		<div class="main-filter panel panel-default mini-box col-md-8 col-md-offset-2 visible" ng-class="{'selected':currentStep>1}">
+		<div class="main-filter panel panel-default mini-box col-md-8 col-md-offset-2 visible clearfix" ng-class="{'selected':currentStep>1}">
 			<div class="col-sm-1"><span class="box-icon">1</span></div>
 	        <div class="box-info col-sm-11">
 	        	<h1 class="col-sm-7">What do you want to learn?</h1>
-	        	<div class="col-sm-5">
-	                <div class="ui-select">
-	                    <select ng-model="courseFilter.domain" ng-options="topic.name for topic in topics track by topic.name">
+	        	<div class="col-sm-5 input-group">
+	                <div class="ui-select form-control">
+	                    <select ng-model="courseFilter.domain" ng-options="domain.name for domain in filterOptions.domains track by domain.id">
 	                        <option value="">Show all</option>
 	                    </select>
 	                </div>
+	                <div class="input-group-btn"><a href="javascript:;" class="btn btn-default btn-success btn-icon-round" ng-click="currentStep=2"><i class="fa fa-check"></i></a></div>
 	            </div>
+                <!-- <div class="col-sm-1"><a href="javascript:;" class="btn-icon-round btn-icon-round-sm bg-primary"><i class="fa fa-bell"></i></a></div> -->
 	        </div>
 		</div>
 
@@ -20,12 +22,13 @@
 		<div class="col-sm-1"><span class="box-icon">2</span></div>
         <div class="box-info col-sm-11">
         	<h1 class="col-sm-7">Anything specific?</h1>
-        	<div class="col-sm-5">
-                <div class="ui-select">
-                    <select ng-model="courseFilter.topic" ng-options="topic.name for topic in topics track by topic.name">
+        	<div class="col-sm-5 input-group">
+                <div class="ui-select form-control">
+                    <select ng-model="courseFilter.subject" ng-options="subject.name for subject in filterOptions.subjects track by subject.id">
                         <option value="">Show all</option>
                     </select>
                 </div>
+                <div class="input-group-btn"><a href="javascript:;" class="btn btn-default btn-success btn-icon-round" ng-click="currentStep=3"><i class="fa fa-check"></i></a></div>
             </div>
         </div>
 	</div>
@@ -35,12 +38,13 @@
 		<div class="col-sm-1"><span class="box-icon">3</span></div>
         <div class="box-info col-sm-11">
         	<h1 class="col-sm-7">What is your skill level?</h1>
-        	<div class="col-sm-5">
-                <div class="ui-select">
-                    <select ng-model="courseFilter.level" ng-options="topic.name for topic in topics track by topic.name">
+        	<div class="col-sm-5 input-group">
+                <div class="ui-select form-control">
+                    <select ng-model="courseFilter.level" ng-options="level.name for level in filterOptions.levels track by level.id">
                         <option value="">Show all</option>
                     </select>
                 </div>
+                <div class="input-group-btn"><a href="javascript:;" class="btn btn-default btn-success btn-icon-round" ng-click="showCatalog()"><i class="fa fa-check"></i></a></div>
             </div>
         </div>
 	</div>

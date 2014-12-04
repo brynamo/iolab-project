@@ -63,7 +63,7 @@ app.get("/courses", function(req, res) {
 		params.subject_id = req.query.subject;
 	if (req.query.skill_level) {
 		// Get skill level
-		var skill_level = _.findWhere(db.skill_levels, {id: parseInt(req.query.skill_level, 10)}); // REPLACE
+		var skill_level = _.findWhere(db.skill_levels, {id: req.query.skill_level}); // REPLACE
 		if (skill_level)
 			params.rigors = _.range(skill_level.rigor_min, skill_level.rigor_max);
 	}

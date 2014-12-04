@@ -19,7 +19,7 @@
 		{"id": "1", "rigor_min": 0, "rigor_max": 2, "name": "Beginner" },
 		{"id": "2", "rigor_min": 2, "rigor_max": 5, "name": "Intermediate" },
 		{"id": "3", "rigor_min": 5, "rigor_max": 8, "name": "Proficient" },
-		{"id": "4", "rigor_min": 8, "rigor_max": 10, "name": "Expert" }
+		{"id": "4", "rigor_min": 8, "rigor_max": 11, "name": "Expert" }
 	],
 
 	"courses": [
