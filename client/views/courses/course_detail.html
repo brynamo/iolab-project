@@ -8,8 +8,7 @@
             <li><a href="#">CSS</a></li>
             <li class="active">Introduction to CSS</li>
           </ol>
-          <div id="course-detail" class="col-md-8">
-            <!--<p><img ng-src="{{course.img}}" class="img-responsive" alt="Course Video"></p>-->
+          <div id="course-detail" class="col-md-9">
             <p><img ng-src="{{course.img}}" style="width:100%;" alt="Course Video"></p>
             <div class="row">
               <div class="col-md-8">
@@ -34,22 +33,22 @@
             </p>
             <!-- #course-detail -->
           </div>
-          <div id="prerequisites" class="col-md-4">
-            <p>Producer: {{course.producer_id}}</p>
-            <p>Rigor: {{course.rigor}}</p>
-            <p>Length: {{course.length}}</p>
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                <h3 class="panel-title">Prerequisites</h3>
-              </div>
-              <div class="panel-body">
-                <ul>
-                  <li>Cras justo odio</li>
-                  <li>Dapibus ac facilisis in</li>
-                </ul>
-              </div>
+          <div id="course_information" class="col-md-3">
+            <div class="well well-lg">
+              <h4>Producer</h4>
+              <p>{{course.producer_id}}</p>
+              <h4>Rigor</h4>
+              <p>{{course.rigor}}</p>
+              <h4>Length</h4>
+              <p>{{course.length}}</p>
+              <h4>Prerequisites</h4>
+              <ul>
+              <li>Cras justo odio</li>
+              <li>Dapibus ac facilisis in</li>
+              </ul>
+            <!-- well -->
             </div>
-            <!-- prerequisites -->
+            <!-- course_information -->
           </div>
         </div>
         <!-- #main -->
