@@ -8,7 +8,9 @@ h3.max-lines-3 {
   text-overflow: ellipsis;
 }
 
-.course-catalog {
+// Course panel box
+.course-box {
+  cursor:pointer;
 
   .panel-label {
     padding-top:10px;
@@ -16,92 +18,62 @@ h3.max-lines-3 {
     text-transform: uppercase;
   }
 
-  .icon-bg-container {
-    position: relative;
-    .icon {
-      opacity:0.5;
-    }
-    .icon-overlay {
-      position: absolute;
-      top:0;
-      left:0;
-      right:0;
-      color:$gray-dark;
-    }
-  }
-
-  .filters {
-    margin-top: 20px;
-    
-    .panel-item {
-      padding: 15px 20px 0;
-    }
-    .panel-left {
-      width:80px;
-    }
-    .panel-right {
-      width:auto;
-    }
-  }
-
-  .course-box .panel-box {
-    cursor:pointer;
-  }
-
-  .panel-box ul.list-justified > li {
-    padding: 0 10px;
-
-    &.text-label {
-      vertical-align: middle;
-      line-height: $font-size-h3;
-    }
-    .btn {
-      vertical-align: super;
-    }
-  }
-
   .panel-heading a {
     color:inherit;
     text-decoration: none;
   }
 
-  .course-box {
-    &.ng-enter, &.ng-move, &.ng-leave {
-      @include transition(all 0.5s ease-out);
-      overflow:hidden; 
-    }
-    &.ng-enter, &.ng-move, &.ng-leave.ng-leave-active {
-      opacity:0;
-      top:50px;
-    }
-    &.ng-enter.ng-enter-active, &.ng-move.ng-move-active, &.ng-leave {
-      opacity: 1;
-      top:0;
+  .panel-bottom {
+    ul.list-justified > li {
+      padding: 0 10px;
+
+      &.text-label {
+        vertical-align: middle;
+        line-height: $font-size-h3;
+      }
+      .btn {
+        vertical-align: super;
+      }
     }
   }
-}
 
-.panel-box {
 
+  &.compact {
+    h3 {
+      margin: 10px 0;
+    }
+  }
+
+
+  // Animations
+  &.ng-enter, &.ng-move, &.ng-leave {
+    @include transition(all 0.5s ease-out);
+    overflow:hidden; 
+  }
+  &.ng-enter, &.ng-move, &.ng-leave.ng-leave-active {
+    opacity:0;
+    top:50px;
+  }
+  &.ng-enter.ng-enter-active, &.ng-move.ng-move-active, &.ng-leave {
+    opacity: 1;
+    top:0;
+  }
+
+  // Rotating buttons
   $animation-time: 0.3s;
-
   .panel-btn-group {
 
     width:100%;
-    //margin-left:-5%;
     margin-top: -75px;
     position: relative;
     height: 150px;
 
     .panel-btn-container {
       width: 50%;
-      
       height: 50px;
       line-height: 50px;
       margin-top: 50px;
       overflow:hidden;
-
-      
 
       .panel-btn {
         display: block;
@@ -164,6 +136,23 @@ h3.max-lines-3 {
       opacity:1;
     }
   } 
+}
+
+
+.course-catalog {
+  .filters {
+    margin-top: 20px;
+    
+    .panel-item {
+      padding: 15px 20px 0;
+    }
+    .panel-left {
+      width:80px;
+    }
+    .panel-right {
+      width:auto;
+    }
+  }
 }
 
 .page-course-filter {

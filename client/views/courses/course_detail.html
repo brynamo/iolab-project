@@ -56,37 +56,44 @@
       </div>
       <div id="other-courses" class="col-md-3">
         <h3>Easier Courses</h3>
-        <div class="thumbnail">
-          <a href="#"><img class="img-responsive" src="http://placehold.it/240x180" alt="100%x180"></a>
-          <div class="caption">
-            <h4>Some Course #2 <span class="label label-success">Free</span></h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit
-            </p>
+        <article class="course-box panel panel-box compact" ng-repeat="course in relatedCourses">
+          <div class="panel-top panel-label color-{{domainColor(course.subject_id)}}">{{subjectName(course.subject_id)}}</div>
+          <div class="panel-heading bg-{{domainColor(course.subject_id)}}" >
+            <h3 class="text-center"><a href="#/courses/{{course.id}}">{{course.name}}</a></h3>
           </div>
-          <!-- .thumbnail -->
-        </div>
-        <div class="thumbnail">
-          <a href="#"><img class="img-responsive" src="http://placehold.it/240x180" alt="100%x180"></a>
-          <div class="caption">
-            <h4>Some Course #3 <span class="label label-warning">$19.99</span></h4>
-            <p>             
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
+          <div class="panel-bottom bg-reverse">
+             <ul class="list-justified text-center">
+                  <li>
+                      <p class="size-h2 text-info"
+                          popover="This is a video course" 
+                          popover-trigger="mouseenter"
+                          popover-placement="bottom"><i class="fa fa-video-camera"></i></p>
+                  </li>
+                  <li>
+                      <button class="btn btn-warning" 
+                          popover="Rating: {{getRatingStars(course.rating)}}" 
+                          popover-trigger="mouseenter"
+                          popover-placement="bottom">
+                              <span class="fa fa-star"></span>&nbsp;&nbsp;{{course.rating}}
+                      </button>
+                  </li>
+                  <li>
+                      <button class="btn btn-danger" 
+                          popover="Rigor level: {{course.rigor}}" 
+                          popover-trigger="mouseenter"
+                          popover-placement="bottom">
+                              <span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.rigor}}
+                      </button>
+                  </li>
+                  <li class="text-label">
+                      <p class="size-h4"
+                          popover="This course is free" 
+                          popover-trigger="mouseenter"
+                          popover-placement="bottom">FREE</p>
+                  </li>                        
+              </ul> 
           </div>
-          <!-- .thumbnail -->
-        </div>
-        <h3>Related Courses</h3>
-        <div class="thumbnail">
-          <a href="#"><img class="img-responsive" src="http://placehold.it/240x180" alt="100%x180"></a>
-          <div class="caption">
-            <h4>Some Course #4 <span class="label label-success">Free</span></h4>
-            <p>   
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            </p>
-          </div>
-          <!-- .thumbnail -->
-        </div>
+        </article>
         <!-- #other-courses -->
       </div>
     </div>

@@ -2,8 +2,8 @@
 angular.module('app.courses')
 
 .controller('courseBrowseCtrl', [
-	'$scope', 'courseFilter', 'Course', 'Subject', 'filterFilter', '$rootScope', 'logger'
-	($scope, courseFilter, Course, Subject, filterFilter, $rootScope, logger) -> 
+	'$scope', 'courseFilter', 'courseUI', 'Course', 'Subject', 'filterFilter', '$rootScope', 'logger'
+	($scope, courseFilter, courseUI, Course, Subject, filterFilter, $rootScope, logger) -> 
 		#$scope.courses = Course.query()
 		
 		$scope.courseFilter = courseFilter.getFilter()
@@ -18,7 +18,11 @@ angular.module('app.courses')
 			$scope.courses = Course.query({subject: $scope.courseFilter.subject?.id, skill_level: $scope.courseFilter.level?.id})
 		)
 
-		subjects = Subject.query()
+		$scope.domainColor = courseUI.domainColor
+		$scope.subjectName = courseUI.subjectName
+		$scope.getRatingStars = courseUI.getRatingStars
+
+		###subjects = Subject.query()
 		getSubject = (subjectId) ->
 			if subjects.length > 0
 				return _.findWhere(subjects, {id:subjectId})
@@ -39,7 +43,7 @@ angular.module('app.courses')
 			return subject.name or ""
 
 		$scope.getRatingStars = (rating) ->
-			return (Array(rating + 1).join "\u2605") + (Array(5 + 1-rating).join "\u2606")
+			return (Array(rating + 1).join "\u2605") + (Array(5 + 1-rating).join "\u2606")###
 
 		$scope.filterTopics = (course) ->
 			selectedDomain = $scope.courseFilter.domain?.id
