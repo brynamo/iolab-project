@@ -6,6 +6,7 @@ angular.module('app', [
     # Angular modules
     'ngRoute'
     'ngAnimate'
+    'ngTagsInput'
 
     # 3rd Party Modules
     'ui.bootstrap'

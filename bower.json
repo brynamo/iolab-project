@@ -30,7 +30,8 @@
     "angular-wizard": "~0.3.0",
     "weather-icons": "~0.0.1",
     "textAngular": "1.2.1",
-    "flot.tooltip": "~0.6.7"
+    "flot.tooltip": "~0.6.7",
+    "ng-tags-input": "2.1.1"
   },
   "resolutions": {
     "jquery": "~2.1.0"

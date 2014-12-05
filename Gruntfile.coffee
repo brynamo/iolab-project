@@ -266,7 +266,6 @@ module.exports = (grunt) ->
             dist:
                 src: ["<%= yeoman.dist %>/bower_components/angular/angular.min.js"]
                 dest: "<%= yeoman.dist %>/scripts/vendor.js"
-
         uglify:
             options:
                 mangle: false
