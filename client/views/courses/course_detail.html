@@ -1,16 +1,15 @@
     <div class="container-fluid">
       <div id="main" class="col-md-9">
-        <h2>{{course.name}}</h2>
-        <ol class="breadcrumb">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Web Development</a></li>
-          <li><a href="#">CSS</a></li>
-          <li class="active">Introduction to CSS</li>
-        </ol>
         <div class="row">
+          <h2>{{course.name}}</h2>
+          <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">CSS</a></li>
+            <li class="active">Introduction to CSS</li>
+          </ol>
           <div id="course-detail" class="col-md-8">
             <p><img src="images/sample_course.jpg" class="img-responsive" alt="Course Video"></p>
-
             <div class="row">
               <div class="col-md-8">
                 <span class="label label-primary">Tag #1</span>
@@ -30,10 +29,12 @@
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
-            <p>Producer: {{course.producer_id}}</p>
             <!-- #course-detail -->
           </div>
           <div id="prerequisites" class="col-md-4">
+            <p>Producer: {{course.producer_id}}</p>
+            <p>Rigor: {{course.rigor}}</p>
+            <p>Length: {{course.length}}</p>
             <div class="panel panel-info">
               <div class="panel-heading">
                 <h3 class="panel-title">Prerequisites</h3>
