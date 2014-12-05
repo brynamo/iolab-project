@@ -31,6 +31,8 @@ h3.max-lines-3 {
   }
 
   .filters {
+    margin-top: 20px;
+    
     .panel-item {
       padding: 15px 20px 0;
     }
@@ -42,7 +44,7 @@ h3.max-lines-3 {
     }
   }
 
-  .panel-box {
+  .course-box .panel-box {
     cursor:pointer;
   }
 
