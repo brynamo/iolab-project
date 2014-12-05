@@ -8,7 +8,7 @@ angular.module('app.controllers', [])
     ($scope, $location) ->
         $scope.isSpecificPage = ->
             path = $location.path()
-            return _.contains( ['/404', '/pages/500', '/pages/login', '/pages/signin', '/pages/signin1', '/pages/signin2', '/pages/signup', '/pages/signup1', '/pages/signup2', '/pages/lock-screen'], path )
+            return _.contains( ['/404', '/pages/500'], path )
 
         $scope.main =
             brand: 'SomeName'
@@ -32,25 +32,33 @@ angular.module('app.controllers', [])
         )
 ])
 
-.controller('DashboardCtrl', [
-    '$scope'
-    ($scope) ->
+.factory('logger', [ ->
 
-        $scope.comboChartData = [
-            ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average']
-            ['2014/05',  165,      938,         522,             998,           450,      614.6]
-            ['2014/06',  135,      1120,        599,             1268,          288,      682]
-            ['2014/07',  157,      1167,        587,             807,           397,      623]
-            ['2014/08',  139,      1110,        615,             968,           215,      609.4]
-            ['2014/09',  136,      691,         629,             1026,          366,      569.6]
-        ]
+    # toastr setting.
+    toastr.options =
+        "closeButton": true
+        "positionClass": "toast-bottom-right"
+        "timeOut": "3000"
 
-        $scope.salesData = [
-            ['Year', 'Sales', 'Expenses']
-            ['2010',  1000,      400]
-            ['2011',  1170,      460]
-            ['2012',  660,       1120]
-            ['2013',  1030,      540]
-        ]
+    logIt = (message, type) ->
+        toastr[type](message)
 
+    return {
+        log: (message) ->
+            logIt(message, 'info')
+            # return is needed, otherwise AngularJS will error out 'Referencing a DOM node in Expression', thanks https://groups.google.com/forum/#!topic/angular/bsTbZ86WAY4
+            return 
+
+        logWarning: (message) ->
+            logIt(message, 'warning')
+            return
+
+        logSuccess: (message) ->
+            logIt(message, 'success')
+            return
+
+        logError: (message) ->
+            logIt(message, 'error')
+            return
+    }
 ])
