@@ -11,14 +11,16 @@ var express = require('express'),
 var app = express();
 
 // For testing // Add headers
-app.use(function (req, res, next) {
-	// Website you wish to allow to connect
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000');
+if (!process.env.IS_LIVE) {
+	app.use(function (req, res, next) {
+		// Website you wish to allow to connect
+		res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000');
 
-	// Request methods you wish to allow
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-	next();
-});
+		// Request methods you wish to allow
+		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+		next();
+	});
+}
 
 
 // Configuration
