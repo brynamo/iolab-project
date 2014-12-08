@@ -14,7 +14,6 @@ angular.module('app.courses.catalog', [])
 		)
 
 		$scope.$watchCollection('[courseFilter.domain, courseFilter.subject, courseFilter.level]', (newValues, oldValues) ->
-			console.log("Seen", newValues, oldValues)
 			$scope.courses = Course.query({subject: $scope.courseFilter.subject?.id, skill_level: $scope.courseFilter.level?.id})
 		)
 

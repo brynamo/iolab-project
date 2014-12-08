@@ -5,7 +5,6 @@ angular.module('app.models', ['ngResource'])
 .factory('Course', [
     '$resource', 'ENV'
     ($resource, ENV) ->
-        console.log("API ENDPOINT", ENV.apiEndpoint)
         return $resource(ENV.apiEndpoint+'/courses/:id', {id:'@id'}, { 
         	query: {method:'GET', params:{}, isArray:true}
         	get: {method: 'GET', params:{id:'@id'}, isArray: false},
