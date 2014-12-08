@@ -1,5 +1,5 @@
 'use strict'
-angular.module('app.courses', [])
+angular.module('app.courses.services', [])
 
 .service('courseFilter', [
 	'Domain', 'Subject', 'SkillLevel'

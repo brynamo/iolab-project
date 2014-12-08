@@ -30,7 +30,7 @@ app.configure(function() {
     app.use(express.methodOverride());
 
     app.use(app.router);
-    app.use(express.static(__dirname + "/public"));
+    app.use(express.static(path.join(__dirname, "public")));
 
     app.engine('hbs', expressHbs({extname:'hbs', defaultLayout:__dirname+'/server/views/layouts/main.hbs'}));
 	app.set('view engine', 'hbs');
@@ -81,7 +81,7 @@ app.get("/domains/:domain_id/subjects", function(req, res) {
 });
 
 // Get list of type
-app.get("/:collection", function(req, res) {
+app.get("/:collection(domains|subjects|courses|skill_levels)", function(req, res) {
 	var collection = req.params.collection;
 	if (collection && db[collection]) {
 		res.json(db[collection]); // Replace with mongo
@@ -91,7 +91,7 @@ app.get("/:collection", function(req, res) {
 });
 
 // Get specific entity
-app.get("/:collection/:entity", function(req, res) {
+app.get("/:collection(domains|subjects|courses|skill_levels)/:entity", function(req, res) {
 	var collection = req.params.collection;
 	var entity = req.params.entity;
 

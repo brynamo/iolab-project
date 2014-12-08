@@ -1,5 +1,5 @@
 'use strict'
-angular.module('app.courses')
+angular.module('app.courses.filter', [])
 
 .controller('courseFilterCtrl', [
 	'$scope', '$location', 'courseFilter', 'Domain', 'filterFilter', '$rootScope', 'logger'

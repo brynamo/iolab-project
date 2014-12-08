@@ -25,6 +25,26 @@ module.exports = (grunt) ->
         yeomanConfig.app = require("./bower.json").appPath or yeomanConfig.app
     grunt.initConfig
         yeoman: yeomanConfig
+        ngconstant:
+          # Options for all targets
+          options:
+            space: '  '
+            wrap: '"use strict";\n\n{%= __ngModule %}'
+            name: 'app.config'
+            dest: '<%= yeoman.app %>/scripts/shared/config.coffee'
+          
+          # Environment targets
+          development:
+            constants:
+              ENV:
+                name: 'development'
+                apiEndpoint: 'http://localhost:3333'
+          production:
+            constants:
+              ENV:
+                name: 'production'
+                apiEndpoint: ''
+
         watch:
             coffee:
                 files: ["<%= yeoman.app %>/scripts/**/*.coffee"]
@@ -276,8 +296,8 @@ module.exports = (grunt) ->
 
     grunt.registerTask "server", (target) ->
         return grunt.task.run(["build", "open", "connect:dist:keepalive"])  if target is "dist"
-        grunt.task.run ["clean:server", "concurrent:server", "connect:livereload", "open", "watch"]
+        grunt.task.run ["clean:server", 'ngconstant:development', "concurrent:server", "connect:livereload", "open", "watch"]
 
-    grunt.registerTask "build", ["clean:dist", "useminPrepare", "concurrent:dist", "copy:dist", "concat", "uglify", "usemin"]
+    grunt.registerTask "build", ["clean:dist", "useminPrepare", 'ngconstant:production', "concurrent:dist", "copy:dist", "concat", "uglify", "usemin"]
     grunt.registerTask "heroku", ["build"]
     grunt.registerTask "default", ["server"]

@@ -1,5 +1,5 @@
 'use strict'
-angular.module('app.courses')
+angular.module('app.courses.catalog', [])
 
 .controller('courseBrowseCtrl', [
 	'$scope', 'courseFilter', 'courseUI', 'Course', 'Subject', 'filterFilter', '$rootScope', 'logger'

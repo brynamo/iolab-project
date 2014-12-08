@@ -1,5 +1,5 @@
 'use strict'
-angular.module('app.courses')
+angular.module('app.courses.details', [])
 .config([
 	'tagsInputConfigProvider'
 	(tagsInputConfigProvider) ->

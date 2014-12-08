@@ -1,7 +1,5 @@
 'use strict';
 
-angular.module('app.courses', [])
-
 angular.module('app', [
     # Angular modules
     'ngRoute'
@@ -12,11 +10,15 @@ angular.module('app', [
     'ui.bootstrap'
 
     # Custom modules
+    'app.config'
     'app.controllers'
     'app.directives'
     'app.localization'
     'app.models'
-    'app.courses'
+    'app.courses.services'
+    'app.courses.filter'
+    'app.courses.catalog'
+    'app.courses.details'
 ])
     
 .config([
