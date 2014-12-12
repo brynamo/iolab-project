@@ -3,8 +3,9 @@ var express = require('express'),
 	http = require('http'),
 	path = require('path'),
 	expressHbs = require('express3-handlebars'),
-	mongoose = require("mongoose");
-	_ = require('underscore');
+	mongoose = require("mongoose"),
+	_ = require('underscore'),
+	models = require('./models');
 
 
 
@@ -47,64 +48,6 @@ app.configure(function() {
 var MONGOHQ_URL="mongodb://team4:alexisgreat@dogen.mongohq.com:10031/io-db"
 mongoose.connect(MONGOHQ_URL);
 
-//Schemas
-var CourseSchema = new mongoose.Schema({
-  author_id: String,
-  course_medium: String,
-  description: String,
-  img: String,
-  is_free: Boolean,
-  language: String,
-  length: String,
-  name: String,
-  prereq: String,
-  producer_id: String,
-  producer_name: String,
-  rating: Array,
-  rigor: Array,
-  subject: String,
-  subject_id: String,
-  tags: Array,
-  url: String,
-}, 
-  { collection: 'Courses' });
-
-var DomainSchema = new mongoose.Schema({
-  color_code: String,
-  domain: String,
-}, 
-  { collection: 'Domains' });
-
-var ProducerSchema = new mongoose.Schema({
-  about: String,
-  logo: String,
-  name: String,
-  rating: Array,
-  website: String,
-}, 
-  { collection: 'Producers' });
-
-var RigorSchema = new mongoose.Schema({
-  level: String,
-  rigor_max: Number,
-  rigor_min: String,
-}, 
-  { collection: 'Producers' });
-
-var SubjectSchema = new mongoose.Schema({
-  domain_id: String,
-  subject: String,
-}, 
-  { collection: 'Subjects' });
-
-//Models
-var CourseModel = mongoose.model( 'Courses', CourseSchema );
-var DomainModel = mongoose.model( 'Domain', DomainSchema );
-var ProducerModel = mongoose.model( 'Producer', ProducerSchema );
-var SubjectModel = mongoose.model( 'Subject', SubjectSchema );
-var RigorModel = mongoose.model('Rigor', RigorSchema);
-
-
 
 // Data - Hardcode for now
 //var db = require("./data.json");
@@ -144,7 +87,7 @@ app.get( '/courses', function( request, response ) {
 		            console.log( err );
 		            return response.send('ERROR');
 		        }		
-			});
+			}
         } else {
             console.log( err );
             return response.send('ERROR');
@@ -173,12 +116,6 @@ return (!params.subject_id || course.subject_id == params.subject_id) && (!param
     });
 });*/
 
-var models = {
-	'courses': CourseModel,
-	'domains': DomainModel,
-	'producers': ProducerModel,
-	'subjects': SubjectModel
-}
 
 //TEST FOR VARIABLE URL
 app.get( '/:collection/:entity', function( request, response ) {
