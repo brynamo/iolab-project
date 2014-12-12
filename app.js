@@ -49,7 +49,6 @@ mongoose.connect(MONGOHQ_URL);
 
 //Schemas
 var CourseSchema = new mongoose.Schema({
-  _id: String,
   author_id: String,
   course_medium: String,
   description: String,
@@ -71,14 +70,12 @@ var CourseSchema = new mongoose.Schema({
   { collection: 'Courses' });
 
 var DomainSchema = new mongoose.Schema({
-  _id: String,	
   color_code: String,
   domain: String,
 }, 
   { collection: 'Domains' });
 
 var ProducerSchema = new mongoose.Schema({
-  _id: String,	
   about: String,
   logo: String,
   name: String,
@@ -88,7 +85,6 @@ var ProducerSchema = new mongoose.Schema({
   { collection: 'Producers' });
 
 var RigorSchema = new mongoose.Schema({
-  _id: String,	
   level: String,
   rigor_max: Number,
   rigor_min: String,
@@ -96,7 +92,6 @@ var RigorSchema = new mongoose.Schema({
   { collection: 'Producers' });
 
 var SubjectSchema = new mongoose.Schema({
-  _id: String,
   domain_id: String,
   subject: String,
 }, 
@@ -178,12 +173,20 @@ app.get( '/:collection/:entity', function( request, response ) {
 	var collection = request.params.collection;
 	var Model = models[collection];
 	var entity = request.params.entity;
-	var object = _.findWhere(Model, {author_id:entity});
-	console.log("test", collection)
+	var object = Model.findById(entity, function (err, courseINFO) {
+		console.log(err);
+		console.log(entity, courseINFO)
+		if( !err ) {
+	            return response.json(courseINFO);
+	        } else {
+	            console.log( err );
+	            return response.send('ERROR');
+	        }		
+	});
+	/*console.log("test", collection)
 	console.log("entity", entity)
 	//console.log(Model)
 	console.log(object)
-	//return Model.find(function(err, info) {
 	return Model.find(function(err, info) {
 	        if( !err ) {
 	            return response.json(info);
@@ -191,7 +194,7 @@ app.get( '/:collection/:entity', function( request, response ) {
 	            console.log( err );
 	            return response.send('ERROR');
 	        }
-	});
+	});*/
 });
 
 /*
