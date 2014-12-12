@@ -102,6 +102,7 @@ var CourseModel = mongoose.model( 'Courses', CourseSchema );
 var DomainModel = mongoose.model( 'Domain', DomainSchema );
 var ProducerModel = mongoose.model( 'Producer', ProducerSchema );
 var SubjectModel = mongoose.model( 'Subject', SubjectSchema );
+var RigorModel = mongoose.model('Rigor', RigorSchema);
 
 
 
@@ -121,34 +122,45 @@ var SubjectModel = mongoose.model( 'Subject', SubjectSchema );
 // Put custom routes here
 
 // Specialized route for courses
-/*app.get( '/courses', function( request, response ) {
-    return CourseModel.find(function( err, Courses ) {
+app.get( '/courses', function( request, response ) {
+    return CourseModel.find(function( err, courses ) {
         if( !err ) {
-            return response.json(Courses);
+        	var params = {};
+			if (request.query.subject)
+				params.subject_id = request.query.subject;
+				console.log (params.subject_id)
+			if (request.query.rigor) {
+				// Get skill level
+				var rigor = _.findWhere(RigorModel, {id: request.query.rigor}); // REPLACE
+				if (rigor)
+					params.rigors = _.range(rigor.rig_min, rigor.rig_max);
+			}
+			CourseModel.find({subject: params.subject_id}), function (err, courseINFO) {
+			console.log(err);
+			console.log(entity, courseINFO)
+			if( !err ) {
+		            return response.json(courseINFO);
+		        } else {
+		            console.log( err );
+		            return response.send('ERROR');
+		        }		
+			});
         } else {
             console.log( err );
             return response.send('ERROR');
         }
     });
-});*/
-
-/*	var params = {};
-	if (req.query.subject)
-		params.subject_id = req.query.subject;
-	if (req.query.skill_level) {
-		// Get skill level
-		var skill_level = _.findWhere(db.skill_levels, {id: req.query.skill_level}); // REPLACE
-		if (skill_level)
-			params.rigors = _.range(skill_level.rigor_min, skill_level.rigor_max);
-	}
-
-
-	// Data lookup
-	res.json( _.filter(db.courses, function(course) {
-		return (!params.subject_id || course.subject_id == params.subject_id) && (!params.rigors || params.rigors.indexOf(course.rigor) > -1);
-	}));
 });
+
+
+////JEPPE FILTER////
+
+/* _.filter(CourseModel, function(err, course) {
+return (!params.subject_id || course.subject_id == params.subject_id) && (!params.rigors || params.rigors.indexOf(course.rigor) > -1);
+}));
 */
+/////
+
 // Get subject for domain
 /*app.get( '/domains', function( request, response ) {
     return DomainModel.find(function( err, Domains ) {
@@ -183,10 +195,11 @@ app.get( '/:collection/:entity', function( request, response ) {
 	            return response.send('ERROR');
 	        }		
 	});
-	/*console.log("test", collection)
-	console.log("entity", entity)
-	//console.log(Model)
-	console.log(object)
+});
+/*
+app.get( '/:collection', function( request, response ) {
+	var collection = request.params.collection;
+	var Model = models[collection];
 	return Model.find(function(err, info) {
 	        if( !err ) {
 	            return response.json(info);
@@ -194,32 +207,7 @@ app.get( '/:collection/:entity', function( request, response ) {
 	            console.log( err );
 	            return response.send('ERROR');
 	        }
-	});*/
-});
-
-/*
-	if (collection == 'domains') {
-
-	    return DomainModel.find(function( err, Domains ) {
-	        if( !err ) {
-	            return response.json(Domains);
-	        } else {
-	            console.log( err );
-	            return response.send('ERROR');
-	        }
-	    });
-	}
-	else if (collection == 'courses') {
-		console.log("i'm batman")
-	    return CoursesModel.find(function( err, Courses ) {
-	        if( !err ) {
-	            return response.json(Courses);
-	        } else {
-	            console.log( err );
-	            return response.send('ERROR');
-	        }
-    	});
-	}
+	});
 });
 */
 
