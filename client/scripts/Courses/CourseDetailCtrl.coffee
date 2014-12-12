@@ -17,6 +17,7 @@ angular.module('app.courses.details', [])
 			if newValue and oldValue
 				console.log("Rate", newValue, oldValue)
 				## Send online
+				$scope.course.$rate();
 				$scope.hasRated = true
 
 		)

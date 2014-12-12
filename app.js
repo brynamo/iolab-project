@@ -18,6 +18,7 @@ if (!process.env.IS_LIVE) {
 
 		// Request methods you wish to allow
 		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+		res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 		next();
 	});
 }
@@ -74,6 +75,13 @@ app.get("/courses", function(req, res) {
 	res.json( _.filter(db.courses, function(course) {
 		return (!params.subject_id || course.subject_id == params.subject_id) && (!params.rigors || params.rigors.indexOf(course.rigor) > -1);
 	}));
+});
+
+app.put("/courses/:entity/rate", function(req, res) {
+	var entity = req.params.entity;
+	var rating = req.body.rating;
+	console.log("Recieved rating", entity, rating);
+	return res.json(req.body);
 });
 
 // Get subject for domain
