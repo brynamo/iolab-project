@@ -17,7 +17,7 @@ var BaseSchema = function() {
 util.inherits(BaseSchema, mongoose.Schema);
 
 //Schemas
-var CourseSchema = new mongoose.Schema({
+var CourseSchema = new BaseSchema({
   author_id: String,
   course_medium: String,
   description: String,
@@ -38,13 +38,13 @@ var CourseSchema = new mongoose.Schema({
 }, 
   { collection: 'Courses' });
 
-var DomainSchema = new mongoose.Schema({
+var DomainSchema = new BaseSchema({
   color_code: String,
   domain: String,
 }, 
   { collection: 'Domains' });
 
-var ProducerSchema = new mongoose.Schema({
+var ProducerSchema = new BaseSchema({
   about: String,
   logo: String,
   name: String,
@@ -53,14 +53,14 @@ var ProducerSchema = new mongoose.Schema({
 }, 
   { collection: 'Producers' });
 
-var RigorSchema = new mongoose.Schema({
+var RigorSchema = new BaseSchema({
   level: String,
   rigor_max: Number,
   rigor_min: String,
 }, 
   { collection: 'Producers' });
 
-var SubjectSchema = new mongoose.Schema({
+var SubjectSchema = new BaseSchema({
   domain_id: String,
   subject: String,
 }, 
