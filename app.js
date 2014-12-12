@@ -3,6 +3,7 @@ var express = require('express'),
 	http = require('http'),
 	path = require('path'),
 	expressHbs = require('express3-handlebars'),
+	mongoose = require("mongoose");
 	_ = require('underscore');
 
 
@@ -42,25 +43,101 @@ app.configure(function() {
 	});	
 });
 
+//bryan look at this
+var MONGOHQ_URL="mongodb://team4:alexisgreat@dogen.mongohq.com:10031/io-db"
+mongoose.connect(MONGOHQ_URL);
+
+//Schemas
+var CourseSchema = new mongoose.Schema({
+  _id: String,
+  author_id: String,
+  course_medium: String,
+  description: String,
+  img: String,
+  is_free: Boolean,
+  language: String,
+  length: String,
+  name: String,
+  prereq: String,
+  producer_id: String,
+  producer_name: String,
+  rating: Array,
+  rigor: Array,
+  subject: String,
+  subject_id: String,
+  tags: Array,
+  url: String,
+}, 
+  { collection: 'Courses' });
+
+var DomainSchema = new mongoose.Schema({
+  _id: String,	
+  color_code: String,
+  domain: String,
+}, 
+  { collection: 'Domains' });
+
+var ProducerSchema = new mongoose.Schema({
+  _id: String,	
+  about: String,
+  logo: String,
+  name: String,
+  rating: Array,
+  website: String,
+}, 
+  { collection: 'Producers' });
+
+var RigorSchema = new mongoose.Schema({
+  _id: String,	
+  level: String,
+  rigor_max: Number,
+  rigor_min: String,
+}, 
+  { collection: 'Producers' });
+
+var SubjectSchema = new mongoose.Schema({
+  _id: String,
+  domain_id: String,
+  subject: String,
+}, 
+  { collection: 'Subjects' });
+
+//Models
+var CourseModel = mongoose.model( 'Courses', CourseSchema );
+var DomainModel = mongoose.model( 'Domain', DomainSchema );
+var ProducerModel = mongoose.model( 'Producer', ProducerSchema );
+var SubjectModel = mongoose.model( 'Subject', SubjectSchema );
 
 
 
 // Data - Hardcode for now
-var db = require("./data.json");
+//var db = require("./data.json");
 
 /*******
  * URLs
  * /courses - with query params
+ * /courses/:id
  * /domains
  * /domains/:id/subjects
  * /skill_levels
+ * 
  ******/
 
 // Put custom routes here
 
 // Specialized route for courses
-app.get("/courses", function(req, res) {
-	var params = {};
+/*app.get( '/courses', function( request, response ) {
+    return CourseModel.find(function( err, Courses ) {
+        if( !err ) {
+            return response.json(Courses);
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});*/
+
+/*	var params = {};
 	if (req.query.subject)
 		params.subject_id = req.query.subject;
 	if (req.query.skill_level) {
@@ -70,17 +147,87 @@ app.get("/courses", function(req, res) {
 			params.rigors = _.range(skill_level.rigor_min, skill_level.rigor_max);
 	}
 
+
 	// Data lookup
 	res.json( _.filter(db.courses, function(course) {
 		return (!params.subject_id || course.subject_id == params.subject_id) && (!params.rigors || params.rigors.indexOf(course.rigor) > -1);
 	}));
 });
-
+*/
 // Get subject for domain
+/*app.get( '/domains', function( request, response ) {
+    return DomainModel.find(function( err, Domains ) {
+        if( !err ) {
+            return response.json(Domains);
+        } else {
+            console.log( err );
+            return response.send('ERROR');
+        }
+    });
+});*/
+
+var models = {
+	'courses': CourseModel,
+	'domains': DomainModel,
+	'producers': ProducerModel,
+	'subjects': SubjectModel
+}
+
+//TEST FOR VARIABLE URL
+app.get( '/:collection/:entity', function( request, response ) {
+	var collection = request.params.collection;
+	var Model = models[collection];
+	var entity = request.params.entity;
+	var object = _.findWhere(Model, {author_id:entity});
+	console.log("test", collection)
+	console.log("entity", entity)
+	//console.log(Model)
+	console.log(object)
+	//return Model.find(function(err, info) {
+	return Model.find(function(err, info) {
+	        if( !err ) {
+	            return response.json(info);
+	        } else {
+	            console.log( err );
+	            return response.send('ERROR');
+	        }
+	});
+});
+
+/*
+	if (collection == 'domains') {
+
+	    return DomainModel.find(function( err, Domains ) {
+	        if( !err ) {
+	            return response.json(Domains);
+	        } else {
+	            console.log( err );
+	            return response.send('ERROR');
+	        }
+	    });
+	}
+	else if (collection == 'courses') {
+		console.log("i'm batman")
+	    return CoursesModel.find(function( err, Courses ) {
+	        if( !err ) {
+	            return response.json(Courses);
+	        } else {
+	            console.log( err );
+	            return response.send('ERROR');
+	        }
+    	});
+	}
+});
+*/
+
+//OLD CODE!!!!!!!!!!!!!!!!!!
+/*
 app.get("/domains/:domain_id/subjects", function(req, res) {
 	var domain_id = req.params.domain_id;
 	res.json( _.where(db.subjects, {domain_id: domain_id}));
 });
+
+
 
 // Get list of type
 app.get("/:collection(domains|subjects|courses|skill_levels)", function(req, res) {
@@ -91,6 +238,7 @@ app.get("/:collection(domains|subjects|courses|skill_levels)", function(req, res
 		res.send(400, {error: 'Bad url', url: req.url});
 	}
 });
+
 
 // Get specific entity
 app.get("/:collection(domains|subjects|courses|skill_levels)/:entity", function(req, res) {
@@ -106,7 +254,7 @@ app.get("/:collection(domains|subjects|courses|skill_levels)/:entity", function(
 		res.send(400, {error: 'Bad url', url: req.url});
 	}
 });
-
+*/
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log("Express server listening on port " + app.get('port'));
