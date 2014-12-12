@@ -116,21 +116,32 @@ return (!params.subject_id || course.subject_id == params.subject_id) && (!param
     });
 });*/
 
+/** 
+ * Add valid collections to route filter
+ **/
+var validCollectionRoute = function(route) {
+	var validCollections = Object.keys(models).join("|");
+	var collectionVar = ":collection";
+	return route.replace(collectionVar, collectionVar+"("+validCollections+")");
+};
+
 
 //TEST FOR VARIABLE URL
-app.get( '/:collection/:entity', function( request, response ) {
+app.get( validCollectionRoute('/:collection/:entity?'), function( request, response ) {
 	var collection = request.params.collection;
-	var Model = models[collection];
 	var entity = request.params.entity;
-	var object = Model.findById(entity, function (err, courseINFO) {
-		console.log(err);
-		console.log(entity, courseINFO)
+	var Model = models[collection];
+	// Find just one or all
+	var query = entity ? Model.findById(entity) : Model.find();
+
+	// Execute query
+	query.exec(function (err, data) {
 		if( !err ) {
-	            return response.json(courseINFO);
-	        } else {
-	            console.log( err );
-	            return response.send('ERROR');
-	        }		
+			return response.json(data);
+		} else {
+            console.log( err );
+            return response.send(404, {error: 'Not found', url: request.url, trace: err});
+		}		
 	});
 });
 /*
