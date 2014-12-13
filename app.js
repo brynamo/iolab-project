@@ -88,7 +88,7 @@ app.get( '/courses', function( request, response ) {
 		params.subject_id = request.query.subject;
 
 	// Find courses
-    models.courses.find(params).limit(10).exec(function( err, courses ) {
+    models.courses.find(params).limit(20).exec(function( err, courses ) {
 		if( err ) {
 			console.log( err );
             return response.send(500, {'error':'Internal Server Error'});
