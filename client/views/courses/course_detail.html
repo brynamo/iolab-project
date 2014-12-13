@@ -18,7 +18,7 @@
               </div>
               <div class="col-md-4">
                 <rating class="ui-rating ui-rating-warning size-h3 pull-right"
-                        value="course.rating"
+                        value="course.avg_rating"
                         max="5"
                         min="0"
                         readonly="hasRated"
@@ -36,7 +36,7 @@
           <div id="course_information" class="col-md-3">
             <div class="well well-lg">
               <h4>Producer</h4>
-              <p>{{course.producer_id}}</p>
+              <p>{{course.producer_name}}</p>
               <h4>Rigor</h4>
               <p>{{course.rigor}}</p>
               <h4>Length</h4>
@@ -73,7 +73,7 @@
                           popover="Rating: {{getRatingStars(course.rating)}}" 
                           popover-trigger="mouseenter"
                           popover-placement="bottom">
-                              <span class="fa fa-star"></span>&nbsp;&nbsp;{{course.rating}}
+                              <span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating||"N/A"}}
                       </button>
                   </li>
                   <li>
@@ -81,7 +81,7 @@
                           popover="Rigor level: {{course.rigor}}" 
                           popover-trigger="mouseenter"
                           popover-placement="bottom">
-                              <span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.rigor}}
+                              <span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.avg_rigor||"N/A"}}
                       </button>
                   </li>
                   <li class="text-label">

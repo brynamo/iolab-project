@@ -35,6 +35,7 @@ angular.module('app', [
                 '/courses'
                 templateUrl: 'views/courses/courses.html'
                 controller: 'courseBrowseCtrl'
+                reloadOnSearch: false
             )
             .when(
                 '/courses/:courseId'

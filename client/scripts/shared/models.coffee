@@ -34,7 +34,7 @@ angular.module('app.models', ['ngResource'])
 .factory('SkillLevel', [
 	'$resource', 'ENV',
   	($resource, ENV) ->
-    	return $resource(ENV.apiEndpoint+'/skill_levels/:id', {id:'@id'}, { 
+    	return $resource(ENV.apiEndpoint+'/rigors/:id', {id:'@id'}, { 
     		query: {method:'GET', params:{}, isArray:true}
     		get: {method: 'GET', params:{id:'@id'}, isArray: false},
     	})
