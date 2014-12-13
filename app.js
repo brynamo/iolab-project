@@ -44,6 +44,23 @@ app.configure(function() {
 	});	
 });
 
+/** 
+ * Add valid collections to route filter
+ **/
+var validCollectionRoute = function(route) {
+	var validCollections = Object.keys(models).join("|");
+	var collectionVar = ":collection";
+	return route.replace(collectionVar, collectionVar+"("+validCollections+")");
+};
+
+/**
+ * Shorthand util for converting string to ObjectID
+ */
+String.prototype.toObjectId = function() {
+  var ObjectId = mongoose.Schema.Types.ObjectId;
+  return new ObjectId(this.toString());
+};
+
 //bryan look at this
 var MONGOHQ_URL="mongodb://team4:alexisgreat@dogen.mongohq.com:10031/io-db"
 mongoose.connect(MONGOHQ_URL);
@@ -66,32 +83,35 @@ mongoose.connect(MONGOHQ_URL);
 
 // Specialized route for courses
 app.get( '/courses', function( request, response ) {
-    return CourseModel.find(function( err, courses ) {
-        if( !err ) {
-        	var params = {};
-			if (request.query.subject)
-				params.subject_id = request.query.subject;
-				console.log (params.subject_id)
-			if (request.query.rigor) {
-				// Get skill level
-				var rigor = _.findWhere(RigorModel, {id: request.query.rigor}); // REPLACE
-				if (rigor)
-					params.rigors = _.range(rigor.rig_min, rigor.rig_max);
-			}
-			CourseModel.find({subject: params.subject_id}), function (err, courseINFO) {
-			console.log(err);
-			console.log(entity, courseINFO)
-			if( !err ) {
-		            return response.json(courseINFO);
-		        } else {
-		            console.log( err );
-		            return response.send('ERROR');
-		        }		
-			}
-        } else {
-            console.log( err );
-            return response.send('ERROR');
+    var params = {};
+	if (request.query.subject)
+		params.subject_id = request.query.subject;
+
+	// Find courses
+    models.courses.find(params).limit(10).exec(function( err, courses ) {
+		if( err ) {
+			console.log( err );
+            return response.send(500, {'error':'Internal Server Error'});
         }
+
+        // No rigor filter
+        if (!request.query.rigor)
+			return response.json(courses);
+		
+		// Manually filter on rigor - not very efficient
+		models.rigors.findById(request.query.rigor, function(err, rigor) {
+			if (err) {
+				console.error(err);
+				return response.json(courses);
+			}
+
+			return response.json(_.filter(courses, function(course){
+				var avg = course.avg_rigor;
+				// TODO: Consider always returning if null
+				return avg !== null && (avg >= rigor.rig_min && avg < rigor.rig_max);
+			}, this));
+		});
+            
     });
 });
 
@@ -116,17 +136,22 @@ return (!params.subject_id || course.subject_id == params.subject_id) && (!param
     });
 });*/
 
-/** 
- * Add valid collections to route filter
- **/
-var validCollectionRoute = function(route) {
-	var validCollections = Object.keys(models).join("|");
-	var collectionVar = ":collection";
-	return route.replace(collectionVar, collectionVar+"("+validCollections+")");
-};
 
+app.get("/domains/:domain_id/subjects", function(request, response) {
+	var domain_id = request.params.domain_id;
+	models.subjects.find({domain_id:domain_id}, function(err, data) {
+		if( !err ) {
+			return response.json(data);
+		} else {
+            console.log( err );
+            return response.send(404, {error: 'Not found', url: request.url, trace: err});
+		}
+	});
+});
 
-//TEST FOR VARIABLE URL
+/**
+ * Base GET method for both list and specific entities
+ */
 app.get( validCollectionRoute('/:collection/:entity?'), function( request, response ) {
 	var collection = request.params.collection;
 	var entity = request.params.entity;
