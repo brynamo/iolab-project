@@ -1,6 +1,8 @@
 var	util = require('util'),
 	mongoose = require("mongoose"),
-	jsonSelect = require('mongoose-json-select');
+	jsonSelect = require('mongoose-json-select'),
+	_ = require('underscore'),
+	user = require('./user');
 
 var BaseSchema = function() {
 	mongoose.Schema.apply(this, arguments);
@@ -72,6 +74,20 @@ var SubjectSchema = new BaseSchema({
 CourseSchema.virtual('avg_rating').get(function() {
 	return !this.rating || this.rating.length===0 ? null : (this.rating.reduce(function(a, b) { return a + b.rating },0) / this.rating.length);
 });
+
+CourseSchema.virtual('my_rating').get(function() {
+		var myRating = _.findWhere(this.rating, {user_id: user.id});
+		return myRating ? myRating.rating : null;
+	})
+	.set(function(rating) {
+			if (this.my_rating) {
+				var myRating = _.findWhere(this.rating, {user_id: user.id});
+				myRating.rating = rating;
+			} else {
+				this.rating.push({user_id:user.id, rating: rating});
+			}
+			console.log("Updated ratings", this.rating);
+	});
 CourseSchema.virtual('avg_rigor').get(function() {
 	return !this.rigor || this.rigor.length===0 ? null : (this.rigor.reduce(function(a, b) { return a + b.rigor },0) / this.rigor.length);
 });

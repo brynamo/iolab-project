@@ -63,12 +63,15 @@ String.prototype.toObjectId = function() {
 };
 
 //bryan look at this
-var MONGOHQ_URL="mongodb://team4:alexisgreat@dogen.mongohq.com:10031/io-db"
+var MONGOHQ_URL="mongodb://team4:alexisgreat@dogen.mongohq.com:10031/io-db";
 mongoose.connect(MONGOHQ_URL);
 
 
 // Data - Hardcode for now
 //var db = require("./data.json");
+
+// Hardcoded user
+var user = require('./user');
 
 /*******
  * URLs
@@ -117,11 +120,23 @@ app.get( '/courses', function( request, response ) {
 });
 
 
-app.put("/courses/:entity/rate", function(req, res) {
-	var entity = req.params.entity;
-	var rating = req.body.rating;
-	console.log("Recieved rating", entity, rating);
-	return res.json(req.body);
+app.put("/courses/:entity/rate", function(request, response) {
+	var entity = request.params.entity;
+	var rating = request.body.my_rating;
+	console.log("Recieved rating", entity, rating, user.name);
+
+	models.courses.findById(entity, function(err, course) {
+		if( !err ) {
+			course.set('my_rating', rating);
+			course.save(function(err) {
+				return response.json(course);
+			});
+		} else {
+            console.log( err );
+            return response.send(404, {error: 'Not found', url: request.url});
+		}
+	});
+	//return res.json(req.body);
 });
 
 app.get("/domains/:domain_id/subjects", function(request, response) {

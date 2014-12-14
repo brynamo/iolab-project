@@ -11,15 +11,13 @@ angular.module('app.courses.details', [])
 		$scope.course = Course.get({id: $routeParams.courseId})
 		console.log("Course", $scope.course)
 		
-		$scope.hasRated = false # Get from user info in future
+		
 
-		$scope.$watch('course.rating', (newValue, oldValue) -> 
-			if newValue and oldValue
-				console.log("Rate", newValue, oldValue)
+		$scope.$watch('course.my_rating', (newValue, oldValue) -> 
+			if newValue
 				## Send online
 				$scope.course.$rate();
-				$scope.hasRated = true
-
+				$scope.hasRated = ($scope.course.my_rating != null)
 		)
 
 		$scope.tags = ["Tag 1", "Tag 2"];

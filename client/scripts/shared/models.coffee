@@ -8,7 +8,7 @@ angular.module('app.models', ['ngResource'])
         return $resource(ENV.apiEndpoint+'/courses/:id/:action', {id:'@id'}, { 
             query: {method:'GET', params:{}, isArray:true}
             get: {method: 'GET', params:{id:'@id'}, isArray: false}
-            rate: {method: 'PUT', params:{action:'rate', rating:0}}
+            rate: {method: 'PUT', params:{action:'rate'}}
         })
 ])
 
