@@ -73,18 +73,18 @@
                         </li>
                         <li>
                             <button class="btn btn-warning" 
-                                popover="Rating: {{getRatingStars(course.rating)}}" 
+                                popover="Rating: {{getRatingStars(course.avg_rating)}}" 
                                 popover-trigger="mouseenter"
                                 popover-placement="bottom">
-                                    <span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating||"N/A"}}
+                                    <span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating|number:1||"N/A"}}
                             </button>
                         </li>
                         <li>
                             <button class="btn btn-danger" 
-                                popover="Rigor level: {{course.rigor}}" 
+                                popover="Rigor level: {{course.avg_rigor}}" 
                                 popover-trigger="mouseenter"
                                 popover-placement="bottom">
-                                    <span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.avg_rigor||"N/A"}}
+                                    <span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.avg_rigor|number:1||"N/A"}}
                             </button>
                         </li>
                         <li class="text-label">

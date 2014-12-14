@@ -82,6 +82,7 @@ angular.module('app.courses.services', [])
 				return if subject then subject.subject else ""
 
 			getRatingStars: (rating) ->
+				rating = if rating then Math.round(rating) else 0
 				return if rating? and rating > 0 then (Array(rating + 1).join "\u2605") + (Array(5 + 1-rating).join "\u2606") else ""
 		}
 ])
