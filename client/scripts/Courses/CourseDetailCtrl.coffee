@@ -26,10 +26,10 @@ angular.module('app.courses.details', [])
 			console.log("Tags changed", changedTag, $scope.tags)
 
 		$scope.domainColor = courseUI.domainColor
+		$scope.getDomain = courseUI.getDomain
 		$scope.subjectName = courseUI.subjectName
 		$scope.getRatingStars = courseUI.getRatingStars
-
-
+		
 		$scope.relatedCourses = []
 
 		# Dummy populate

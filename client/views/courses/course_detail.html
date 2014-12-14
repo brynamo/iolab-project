@@ -2,13 +2,12 @@
       <div id="main" class="col-md-9">
         <div class="row">
           <h2>{{course.name}}</h2>
+          <p>Course Page: <a href="{{course.url}}" target="_blank">{{course.url}}</a></p>
           <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">CSS</a></li>
-            <li class="active">Introduction to CSS</li>
+            <li><a href="#">{{getDomain(course.subject_id).domain}}</a></li>
+            <li><a href="#">{{subjectName(course.subject_id)}}</a></li>
           </ol>
-          <div id="course-detail" class="col-md-9">
+          <div id="course-detail" class="col-md-8">
             <p><img ng-src="{{course.img}}" style="width:100%;" alt="Course Video"></p>
             <div class="row">
               <div class="col-md-8">
@@ -27,13 +26,10 @@
                         state-off="'fa fa-star-o'"></rating>
               </div>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
+            <p>{{course.description}}</p>
             <!-- #course-detail -->
           </div>
-          <div id="course_information" class="col-md-3">
+          <div id="course_information" class="col-md-4">
             <div class="well well-lg">
               <h4>Producer</h4>
               <p>{{course.producer_name}}</p>
@@ -42,10 +38,7 @@
               <h4>Length</h4>
               <p>{{course.length}}</p>
               <h4>Prerequisites</h4>
-              <ul>
-              <li>Cras justo odio</li>
-              <li>Dapibus ac facilisis in</li>
-              </ul>
+              <p>{{course.prereq}}</p>
             <!-- well -->
             </div>
             <!-- course_information -->
