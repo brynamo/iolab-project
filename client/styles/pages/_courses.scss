@@ -303,6 +303,10 @@ $footer-height: $footer-logo-height + $footer-body-height + $footer-logo-inset;
     }
 }
 
+.breadcrumb {
+    background-color: #DDD;
+}
+
 #main {
     padding-bottom: 30px;
 }
