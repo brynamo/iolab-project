@@ -7,7 +7,7 @@
 	        	<h1 class="col-sm-7">What do you want to learn?</h1>
 	        	<div class="col-sm-5 input-group">
 	                <div class="ui-select form-control">
-	                    <select ng-model="courseFilter.domain" ng-options="domain.name for domain in filterOptions.domains track by domain.id">
+	                    <select ng-model="courseFilter.domain" ng-options="domain.domain for domain in filterOptions.domains track by domain.id">
 	                        <option value="">Show all</option>
 	                    </select>
 	                </div>
@@ -24,7 +24,7 @@
         	<h1 class="col-sm-7">Anything specific?</h1>
         	<div class="col-sm-5 input-group">
                 <div class="ui-select form-control">
-                    <select ng-model="courseFilter.subject" ng-options="subject.name for subject in filterOptions.subjects track by subject.id">
+                    <select ng-model="courseFilter.subject" ng-options="subject.subject for subject in filterOptions.subjects track by subject.id">
                         <option value="">Show all</option>
                     </select>
                 </div>
@@ -40,7 +40,7 @@
         	<h1 class="col-sm-7">What is your skill level?</h1>
         	<div class="col-sm-5 input-group">
                 <div class="ui-select form-control">
-                    <select ng-model="courseFilter.level" ng-options="level.name for level in filterOptions.levels track by level.id">
+                    <select ng-model="courseFilter.level" ng-options="level.level for level in filterOptions.levels track by level.id">
                         <option value="">Show all</option>
                     </select>
                 </div>

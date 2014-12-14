@@ -9,7 +9,7 @@
                 <div class="form-group col-sm-4">
                     <label for="inputDomainSelect" class="control-label">Select Domain: </label>
                     <div class="ui-select">
-                        <select ng-model="courseFilter.domain" ng-options="domain.name for domain in filterOptions.domains track by domain.id">
+                        <select ng-model="courseFilter.domain" ng-options="domain.domain for domain in filterOptions.domains track by domain.id">
                             <option value="">Show all</option>
                         </select>
                     </div>
@@ -17,7 +17,7 @@
                 <div class="form-group col-sm-4">
                     <label for="inputTopicSelect" class="control-label">Select Topic: </label>
                     <div class="ui-select">
-                        <select ng-model="courseFilter.subject" ng-options="subject.name for subject in filterOptions.subjects track by subject.id">
+                        <select ng-model="courseFilter.subject" ng-options="subject.subject for subject in filterOptions.subjects track by subject.id">
                             <option value="">Show all</option>
                         </select>
                     </div>
@@ -25,7 +25,7 @@
                 <div class="form-group col-sm-4">
                     <label for="inputTopicSelect" class="control-label">Select skill level: </label>
                     <div class="ui-select">
-                        <select ng-model="courseFilter.level" ng-options="level.name for level in filterOptions.levels track by level.id">
+                        <select ng-model="courseFilter.level" ng-options="level.level for level in filterOptions.levels track by level.id">
                             <option value="">Show all</option>
                         </select>
                     </div>
@@ -76,7 +76,7 @@
                                 popover="Rating: {{getRatingStars(course.rating)}}" 
                                 popover-trigger="mouseenter"
                                 popover-placement="bottom">
-                                    <span class="fa fa-star"></span>&nbsp;&nbsp;{{course.rating}}
+                                    <span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating||"N/A"}}
                             </button>
                         </li>
                         <li>
@@ -84,7 +84,7 @@
                                 popover="Rigor level: {{course.rigor}}" 
                                 popover-trigger="mouseenter"
                                 popover-placement="bottom">
-                                    <span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.rigor}}
+                                    <span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.avg_rigor||"N/A"}}
                             </button>
                         </li>
                         <li class="text-label">
