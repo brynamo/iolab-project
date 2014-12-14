@@ -8,19 +8,23 @@ angular.module('app.courses.details', [])
 .controller('courseDetailCtrl', [
 	'$scope', '$routeParams', 'courseFilter', 'courseUI', 'Course', 'filterFilter', '$rootScope', 'logger'
 	($scope, $routeParams, courseFilter, courseUI, Course, filterFilter, $rootScope, logger) -> 
-		$scope.course = Course.get({id: $routeParams.courseId})
+		$scope.course = Course.get({id: $routeParams.courseId}, () ->
+			
+			# Start watching when course is initialized
+			$scope.$watch('course.my_rating', (newValue, oldValue) -> 
+				if newValue and newValue != oldValue
+					## Send online
+					console.log("Update rating")
+					$scope.course.$update()
+					
+			)
+
+		)
 		console.log("Course", $scope.course)
 		
 		
 
-		$scope.$watch('course.my_rating', (newValue, oldValue) -> 
-			if newValue and newValue is not oldValue
-				## Send online
-				console.log("Update rating")
-				$scope.course.$update()
-				$scope.hasRated = ($scope.course.my_rating != null)
-		)
-
+		
 		$scope.onTagsChanged = (changedTag) ->
 			console.log("Tags changed", changedTag, $scope.tags)
 			$scope.course.$update()
