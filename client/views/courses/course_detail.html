@@ -15,7 +15,7 @@
             <p><img ng-src="{{course.img}}" style="width:100%;" alt="Course Video"></p>
             <div class="row">
               <div class="col-md-6">
-                <tags-input ng-model="tags"
+                <tags-input ng-model="course.tags"
                   on-tag-added="onTagsChanged($tag)"
                   on-tag-removed="onTagsChanged($tag)"></tags-input>
               </div>

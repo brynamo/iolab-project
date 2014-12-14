@@ -120,14 +120,20 @@ app.get( '/courses', function( request, response ) {
 });
 
 
-app.put("/courses/:entity/rate", function(request, response) {
-	var entity = request.params.entity;
-	var rating = request.body.my_rating;
-	console.log("Recieved rating", entity, rating, user.name);
+app.put("/courses/:entity", function(request, response) {
+	var entity = request.params.entity,
+		rating = request.body.my_rating,
+		tags = request.body.tags;
+
+	console.log("Recieved update", entity, rating, tags, user.name);
 
 	models.courses.findById(entity, function(err, course) {
 		if( !err ) {
-			course.set('my_rating', rating);
+			if (rating)
+				course.set('my_rating', rating);
+			if (tags)
+				course.set('tags', tags);
+
 			course.save(function(err) {
 				return response.json(course);
 			});

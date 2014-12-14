@@ -9,6 +9,7 @@ angular.module('app.models', ['ngResource'])
             query: {method:'GET', params:{}, isArray:true}
             get: {method: 'GET', params:{id:'@id'}, isArray: false}
             rate: {method: 'PUT', params:{action:'rate'}}
+            update: {method: 'PUT', params:{}}
         })
 ])
 

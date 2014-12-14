@@ -14,15 +14,16 @@ angular.module('app.courses.details', [])
 		
 
 		$scope.$watch('course.my_rating', (newValue, oldValue) -> 
-			if newValue
+			if newValue and newValue is not oldValue
 				## Send online
-				$scope.course.$rate();
+				console.log("Update rating")
+				$scope.course.$update()
 				$scope.hasRated = ($scope.course.my_rating != null)
 		)
 
-		$scope.tags = ["Tag 1", "Tag 2"];
 		$scope.onTagsChanged = (changedTag) ->
 			console.log("Tags changed", changedTag, $scope.tags)
+			$scope.course.$update()
 
 		$scope.domainColor = courseUI.domainColor
 		$scope.getDomain = courseUI.getDomain
