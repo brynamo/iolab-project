@@ -25,9 +25,12 @@ h3.max-lines-3 { height: $font-size-h3*$headings-line-height*3; /* Fallback for 
     text-transform: uppercase;
   }
 
-  .panel-heading a {
-    color:inherit;
-    text-decoration: none;
+  .panel-heading {
+    min-height:100px;
+    a {
+      color:inherit;
+      text-decoration: none;
+    }
   }
 
   .panel-bottom {
@@ -40,9 +43,14 @@ h3.max-lines-3 { height: $font-size-h3*$headings-line-height*3; /* Fallback for 
         border-left:none;
       }
 
+
+
       &.text-label {
         vertical-align: middle;
         line-height: $font-size-h3;
+      }
+      @media (max-width: $screen-lg-min) {
+        &.text-label { display:none;  }
       }
       .btn {
         vertical-align: super;
