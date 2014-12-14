@@ -1,20 +1,27 @@
-h3.max-lines-3 {
-  display: block; /* Fallback for non-webkit */
-  display: -webkit-box;
-  height: $font-size-h3*$headings-line-height*3; /* Fallback for non-webkit */
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+[class^="max-lines-"], [class*=" max-lines-"] {
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing:content-box;
 }
+.max-lines-1 { -webkit-line-clamp: 1; height: $font-size-base*$line-height-base*1; /* Fallback for non-webkit */ }
+.max-lines-2 { -webkit-line-clamp: 2; height: $font-size-base*$line-height-base*2; /* Fallback for non-webkit */ }
+.max-lines-3 { -webkit-line-clamp: 3; height: $font-size-base*$line-height-base*3; /* Fallback for non-webkit */ }
+h3.max-lines-1 { height: $font-size-h3*$headings-line-height*1; /* Fallback for non-webkit */ }
+h3.max-lines-2 { height: $font-size-h3*$headings-line-height*2; /* Fallback for non-webkit */ }
+h3.max-lines-3 { height: $font-size-h3*$headings-line-height*3; /* Fallback for non-webkit */ }
+
+
 
 // Course panel box
 .course-box {
   cursor:pointer;
 
   .panel-label {
-    padding-top:10px;
-    padding-bottom:10px;
+    padding:10px;
     text-transform: uppercase;
   }
 
@@ -26,6 +33,12 @@ h3.max-lines-3 {
   .panel-bottom {
     ul.list-justified > li {
       padding: 0 10px;
+      border-right: none;
+      border-left:1px solid #eeeeee;
+
+      &:first-child {
+        border-left:none;
+      }
 
       &.text-label {
         vertical-align: middle;
@@ -151,6 +164,14 @@ h3.max-lines-3 {
     }
     .panel-right {
       width:auto;
+    }
+
+    .control-label {
+      width:105px;
+    }
+    .ui-select {
+      width:210px;
+      & > select { width:100%; }
     }
   }
 }
