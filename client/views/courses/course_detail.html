@@ -1,7 +1,11 @@
     <div class="container-fluid">
       <div id="main" class="col-md-9">
-        <div class="row">
-          <h2>{{course.name}}</h2>
+        <div class="row">       
+          <h2>
+            {{course.name}}
+            <small> <span class="label label-warning">{{course.course_medium}}</span></small>
+            <small> <span class="label label-success">{{course.is_free ? "free" : ""}}</span></small>
+          </h2>
           <p>Course Page: <a href="{{course.url}}" target="_blank">{{course.url}}</a></p>
           <ol class="breadcrumb">
             <li><a href="#">{{getDomain(course.subject_id).domain}}</a></li>
