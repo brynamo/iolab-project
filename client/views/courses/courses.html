@@ -39,7 +39,7 @@
 
         <article class="course-box col-md-3" ng-repeat="course in courses">
             <div class="panel panel-box">
-                <div class="panel-top panel-label color-{{domainColor(course.subject_id)}}">
+                <div class="panel-top panel-label max-lines-1 color-{{domainColor(course.subject_id)}}">
                     {{subjectName(course.subject_id)}}
                 </div>
                     <div class="panel-heading bg-{{domainColor(course.subject_id)}}" >
@@ -87,7 +87,7 @@
                                     <span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.avg_rigor|number:1||"N/A"}}
                             </button>
                         </li>
-                        <li class="text-label">
+                        <li class="text-label visible-lg">
                             <p class="size-h4"
                                 popover="This course is free" 
                                 popover-trigger="mouseenter"
