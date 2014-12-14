@@ -5,9 +5,10 @@ angular.module('app.models', ['ngResource'])
 .factory('Course', [
     '$resource', 'ENV'
     ($resource, ENV) ->
-        return $resource(ENV.apiEndpoint+'/courses/:id', {id:'@id'}, { 
-        	query: {method:'GET', params:{}, isArray:true}
-        	get: {method: 'GET', params:{id:'@id'}, isArray: false},
+        return $resource(ENV.apiEndpoint+'/courses/:id/:action', {id:'@id'}, { 
+            query: {method:'GET', params:{}, isArray:true}
+            get: {method: 'GET', params:{id:'@id'}, isArray: false}
+            rate: {method: 'PUT', params:{action:'rate', rating:0}}
         })
 ])
 

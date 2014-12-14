@@ -14,20 +14,28 @@
           <div id="course-detail" class="col-md-8">
             <p><img ng-src="{{course.img}}" style="width:100%;" alt="Course Video"></p>
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-6">
                 <tags-input ng-model="tags"
                   on-tag-added="onTagsChanged($tag)"
                   on-tag-removed="onTagsChanged($tag)"></tags-input>
               </div>
-              <div class="col-md-4">
-                <rating class="ui-rating ui-rating-warning size-h3 pull-right"
-                        value="course.avg_rating"
-                        max="5"
-                        min="0"
-                        readonly="hasRated"
-                        ng-class="{'has-rated':hasRated}"
-                        state-on="'fa fa-star'"
-                        state-off="'fa fa-star-o'"></rating>
+              <div class="col-md-6">
+
+                <div class="rating-container pull-right">
+                  
+                  <rating class="ui-rating ui-rating-warning size-h3"
+                          value="course.rating"
+                          max="5"
+                          min="0"
+                          readonly="hasRated"
+                          ng-class="{'has-rated':hasRated}"
+                          state-on="'fa fa-star'"
+                          state-off="'fa fa-star-o'"></rating>
+                  <button class="btn btn-warning" 
+                          popover="Average rating: {{getRatingStars(course.avg_rating)}}" 
+                          popover-trigger="mouseenter"><span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating|number:1}}</button>
+                </div>
+                
               </div>
             </div>
             <p>{{course.description}}</p>

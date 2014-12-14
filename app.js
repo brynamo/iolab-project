@@ -20,6 +20,7 @@ if (!process.env.IS_LIVE) {
 
 		// Request methods you wish to allow
 		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+		res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 		next();
 	});
 }
@@ -116,26 +117,12 @@ app.get( '/courses', function( request, response ) {
 });
 
 
-////JEPPE FILTER////
-
-/* _.filter(CourseModel, function(err, course) {
-return (!params.subject_id || course.subject_id == params.subject_id) && (!params.rigors || params.rigors.indexOf(course.rigor) > -1);
-}));
-*/
-/////
-
-// Get subject for domain
-/*app.get( '/domains', function( request, response ) {
-    return DomainModel.find(function( err, Domains ) {
-        if( !err ) {
-            return response.json(Domains);
-        } else {
-            console.log( err );
-            return response.send('ERROR');
-        }
-    });
-});*/
-
+app.put("/courses/:entity/rate", function(req, res) {
+	var entity = req.params.entity;
+	var rating = req.body.rating;
+	console.log("Recieved rating", entity, rating);
+	return res.json(req.body);
+});
 
 app.get("/domains/:domain_id/subjects", function(request, response) {
 	var domain_id = request.params.domain_id;
@@ -169,56 +156,7 @@ app.get( validCollectionRoute('/:collection/:entity?'), function( request, respo
 		}		
 	});
 });
-/*
-app.get( '/:collection', function( request, response ) {
-	var collection = request.params.collection;
-	var Model = models[collection];
-	return Model.find(function(err, info) {
-	        if( !err ) {
-	            return response.json(info);
-	        } else {
-	            console.log( err );
-	            return response.send('ERROR');
-	        }
-	});
-});
-*/
 
-//OLD CODE!!!!!!!!!!!!!!!!!!
-/*
-app.get("/domains/:domain_id/subjects", function(req, res) {
-	var domain_id = req.params.domain_id;
-	res.json( _.where(db.subjects, {domain_id: domain_id}));
-});
-
-
-
-// Get list of type
-app.get("/:collection(domains|subjects|courses|skill_levels)", function(req, res) {
-	var collection = req.params.collection;
-	if (collection && db[collection]) {
-		res.json(db[collection]); // Replace with mongo
-	} else {
-		res.send(400, {error: 'Bad url', url: req.url});
-	}
-});
-
-
-// Get specific entity
-app.get("/:collection(domains|subjects|courses|skill_levels)/:entity", function(req, res) {
-	var collection = req.params.collection;
-	var entity = req.params.entity;
-
-	if (collection && entity && db[collection]) {
-		var object = _.findWhere(db[collection], {id:entity});
-		if (!object)
-			return res.send(404, {error: 'Not found', url: req.url});
-		res.json(object); // Replace with mongo
-	} else {
-		res.send(400, {error: 'Bad url', url: req.url});
-	}
-});
-*/
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log("Express server listening on port " + app.get('port'));
