@@ -11,7 +11,7 @@ angular.module('app.controllers', [])
             return _.contains( ['/404', '/pages/500'], path )
 
         $scope.main =
-            brand: 'SomeName'
+            brand: 'Course Explorer'
             name: 'Jeppe Stougaard' # those which uses i18n can not be replaced with two way binding var for now.
         $scope.course_filter = 
             domain: -1
