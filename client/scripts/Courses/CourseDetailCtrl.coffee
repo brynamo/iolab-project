@@ -9,6 +9,12 @@ angular.module('app.courses.details', [])
 	'$scope', '$routeParams', 'courseFilter', 'courseUI', 'Course', 'filterFilter', '$rootScope', 'logger'
 	($scope, $routeParams, courseFilter, courseUI, Course, filterFilter, $rootScope, logger) -> 
 		$scope.course = Course.get({id: $routeParams.courseId}, () ->
+			# Reformat old tags
+			_.each($scope.course.tags, (tag) ->
+				if tag.text?
+					tag.tag = tag.text
+					delete tag.text
+			)
 			
 			# Start watching when course is initialized
 			$scope.$watch('course.my_rating', (newValue, oldValue) -> 
