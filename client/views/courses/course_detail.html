@@ -15,30 +15,38 @@
             <p><img ng-src="{{course.img}}" style="width:100%;" alt="Course Video"></p>
             <div class="row">
               <div class="col-md-6">
-                <tags-input ng-model="course.tags"
-                  on-tag-added="onTagsChanged($tag)"
-                  on-tag-removed="onTagsChanged($tag)"></tags-input>
-              </div>
-              <div class="col-md-6">
-
-                <div class="rating-container pull-right">
+                
+                <div class="">
+                  <button class="btn btn-danger" 
+                    popover="Average rigor level: {{getRatingStars(course.avg_rigor)}}" 
+                    popover-trigger="mouseenter"><span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.avg_rigor|number:1}}</button>
                   
-                  <rating class="ui-rating ui-rating-warning size-h3"
-                          value="course.my_rating"
-                          max="5"
-                          min="0"
-                          readonly="hasRated"
-                          ng-class="{'has-rated':hasRated}"
-                          state-on="'fa fa-star'"
-                          state-off="'fa fa-star-o'"></rating>
-                  <button class="btn btn-warning" 
-                          popover="Average rating: {{getRatingStars(course.avg_rating)}}" 
-                          popover-trigger="mouseenter"><span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating|number:1}}</button>
                 </div>
                 
               </div>
+              <div class="col-md-6">
+                
+                <div class="rating-container pull-right">                  
+                  <rating class="ui-rating ui-rating-warning size-h3"
+                    value="course.my_rating"
+                    max="5"
+                    min="0"
+                    readonly="hasRated"
+                    ng-class="{'has-rated':hasRated}"
+                    state-on="'fa fa-star'"
+                    state-off="'fa fa-star-o'"></rating>
+                  <button class="btn btn-warning" 
+                    popover="Average rating: {{getRatingStars(course.avg_rating)}}" 
+                    popover-trigger="mouseenter"><span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating|number:1}}</button>
+                </div>
+
+               </div>
             </div>
             <p>{{course.description}}</p>
+            <h4>Tags:</h4>
+            <tags-input ng-model="course.tags"
+              on-tag-added="onTagsChanged($tag)"
+              on-tag-removed="onTagsChanged($tag)"></tags-input>
             <!-- #course-detail -->
           </div>
           <div id="course_information" class="col-md-4">
