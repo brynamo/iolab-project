@@ -13,7 +13,31 @@
           </ol>
           <div id="course-detail" class="col-md-8">
             <p><img ng-src="{{course.img}}" style="width:100%;" alt="Course Video"></p>
+<<<<<<< HEAD
             <div id="feedback-average">
+=======
+            <div class="row">
+              <div class="col-md-6">
+                <tags-input ng-model="course.tags"
+                  on-tag-added="onTagsChanged($tag)"
+                  display-property="tag"
+                  on-tag-removed="onTagsChanged($tag)"></tags-input>
+              </div>
+              <div class="col-md-6">
+
+                <div class="rating-container pull-right">
+                  
+                  <rating class="ui-rating ui-rating-warning size-h3"
+                          value="course.my_rating"
+                          max="5"
+                          min="0"
+                          state-on="'fa fa-star'"
+                          state-off="'fa fa-star-o'"></rating>
+                  <button class="btn btn-warning" 
+                          popover="Average rating: {{getRatingStars(course.avg_rating)}}" 
+                          popover-trigger="mouseenter"><span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating|number:1}}</button>
+                </div>
+>>>>>>> origin/name_update
                 
               <div class="rating-container pull-right">
                 <p class="h4 pull-left">Rating: </p>
@@ -121,7 +145,7 @@
                         <span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.avg_rigor | number:1 ||"N/A"}}
                       </button>
                   </li>
-                  <li class="text-label visible-lg">
+                  <li class="text-label">
                       <p class="size-h4"
                           popover="This course is free" 
                           popover-trigger="mouseenter"
