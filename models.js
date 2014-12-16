@@ -88,11 +88,24 @@ CourseSchema.virtual('my_rating').get(function() {
 			}
 			console.log("Updated ratings", this.rating);
 	});
+CourseSchema.virtual('my_rigor').get(function() {
+		var myRigor = _.findWhere(this.rigor, {user_id: user.id});
+		return myRigor ? myRigor.rigor : null;
+	})
+	.set(function(val) {
+			var myRigor = _.findWhere(this.rigor, {user_id: user.id});
+			if (myRigor) {
+				myRigor.rigor = val;
+			} else {
+				this.rigor.push({user_id:user.id, rigor: val});
+			}
+			console.log("Updated rigors", this.rigor);
+	});
 CourseSchema.virtual('avg_rigor').get(function() {
 	return !this.rigor || this.rigor.length===0 ? null : (this.rigor.reduce(function(a, b) { return a + b.rigor },0) / this.rigor.length);
 });
 
-CourseSchema.plugin(jsonSelect, '-rating -rigor');
+//CourseSchema.plugin(jsonSelect, '-rating -rigor');
 
 
 //Models

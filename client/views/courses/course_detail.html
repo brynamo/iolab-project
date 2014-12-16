@@ -70,19 +70,8 @@
               </div>
               <h4>Evaluate the rigor</h4>
               <div class="rigor-container">
-                <select class="form-control">
-                  <option>-</option>
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
+                <select class="form-control" ng-model="course.my_rigor" ng-options="rigor for rigor in validRigors">
+                  <option value="">-</option>
                 </select>
               </div>
               <!-- well -->
