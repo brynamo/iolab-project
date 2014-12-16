@@ -20,8 +20,7 @@
                 <p class="h4 pull-left">Rating: </p>
                 <button class="btn btn-warning" 
                   popover="Average rating: {{getRatingStars(course.avg_rating)}}" 
-                  popover-trigger="mouseenter"><span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating|number:1}}</button>
-              
+                  popover-trigger="mouseenter"><span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating|number:1}}</button>              
               </div>
               
               <div class="rigor-container pull-right">
@@ -33,15 +32,17 @@
               
               <div class="clearfix"></div>
               
-              <!-- #feedback -->
+              <!-- #feedback-average -->
             </div>
             
             <p id="course-description">{{course.description}}</p>
+            
             <h4>Tags:</h4>
             <tags-input ng-model="course.tags"
               on-tag-added="onTagsChanged($tag)"
               display-property="tag"
               on-tag-removed="onTagsChanged($tag)"></tags-input>
+            
             <!-- #course-detail -->
           </div>
           <div id="course_information" class="col-md-4">
