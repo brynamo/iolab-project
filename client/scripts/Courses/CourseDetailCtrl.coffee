@@ -15,20 +15,25 @@ angular.module('app.courses.details', [])
 					tag.tag = tag.text
 					delete tag.text
 			)
-			
+
 			# Start watching when course is initialized
 			$scope.$watch('course.my_rating', (newValue, oldValue) -> 
 				if newValue and newValue != oldValue
 					## Send online
 					console.log("Update rating")
+					$scope.course.$update()	
+			)
+			$scope.$watch('course.my_rigor', (newValue, oldValue) -> 
+				if newValue and newValue != oldValue
+					## Send online
+					console.log("Update rigor")
 					$scope.course.$update()
-					
 			)
 
 		)
 		console.log("Course", $scope.course)
 		
-		
+		$scope.validRigors = [1..10]
 
 		
 		$scope.onTagsChanged = (changedTag) ->

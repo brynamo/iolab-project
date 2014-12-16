@@ -123,6 +123,7 @@ app.get( '/courses', function( request, response ) {
 app.put("/courses/:entity", function(request, response) {
 	var entity = request.params.entity,
 		rating = request.body.my_rating,
+		rigor = request.body.my_rigor,
 		tags = request.body.tags;
 
 	console.log("Recieved update", entity, rating, tags, user.name);
@@ -131,10 +132,14 @@ app.put("/courses/:entity", function(request, response) {
 		if( !err ) {
 			if (rating)
 				course.set('my_rating', rating);
+			if (rigor)
+				course.set('my_rigor', rigor);
 			if (tags)
 				course.set('tags', tags);
 
 			course.save(function(err) {
+				if (err)
+					console.log("Error on save", err);
 				return response.json(course);
 			});
 		} else {

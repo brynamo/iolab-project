@@ -13,45 +13,70 @@
           </ol>
           <div id="course-detail" class="col-md-8">
             <p><img ng-src="{{course.img}}" style="width:100%;" alt="Course Video"></p>
-            <div class="row">
-              <div class="col-md-6">
-                <tags-input ng-model="course.tags"
-                  on-tag-added="onTagsChanged($tag)"
-                  display-property="tag"
-                  on-tag-removed="onTagsChanged($tag)"></tags-input>
-              </div>
-              <div class="col-md-6">
 
-                <div class="rating-container pull-right">
-                  
-                  <rating class="ui-rating ui-rating-warning size-h3"
-                          value="course.my_rating"
-                          max="5"
-                          min="0"
-                          state-on="'fa fa-star'"
-                          state-off="'fa fa-star-o'"></rating>
-                  <button class="btn btn-warning" 
-                          popover="Average rating: {{getRatingStars(course.avg_rating)}}" 
-                          popover-trigger="mouseenter"><span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating|number:1}}</button>
-                </div>
+            <div id="feedback-average">
                 
+              <div class="rating-container pull-right">
+                <p class="h4 pull-left">Rating: </p>
+                <button class="btn btn-warning" 
+                  popover="Average rating: {{getRatingStars(course.avg_rating)}}" 
+                  popover-trigger="mouseenter"><span class="fa fa-star"></span>&nbsp;&nbsp;{{course.avg_rating|number:1}}</button>              
               </div>
+              
+              <div class="rigor-container pull-right">
+                <p class="h4 pull-left">Rigor: </p>                
+                <button class="btn btn-danger" 
+                  popover="Average rigor level: {{course.avg_rigor | number:1}}" 
+                  popover-trigger="mouseenter"><span class="fa fa-dashboard"></span>&nbsp;&nbsp;{{course.avg_rigor|number:1}}</button>                  
+              </div>
+              
+              <div class="clearfix"></div>
+              
+              <!-- #feedback-average -->
             </div>
-            <p>{{course.description}}</p>
+            
+            <p id="course-description">{{course.description}}</p>
+            
+            <h4>Tags:</h4>
+            <tags-input ng-model="course.tags"
+              on-tag-added="onTagsChanged($tag)"
+              display-property="tag"
+              on-tag-removed="onTagsChanged($tag)"></tags-input>
+            
             <!-- #course-detail -->
           </div>
           <div id="course_information" class="col-md-4">
             <div class="well well-lg">
               <h4>Producer</h4>
               <p>{{course.producer_name}}</p>
-              <h4>Rigor</h4>
-              <p>{{course.avg_rating | number:1}}</p>
               <h4>Length</h4>
               <p>{{course.length}}</p>
               <h4>Prerequisites</h4>
               <p>{{course.prereq}}</p>
             <!-- well -->
             </div>
+            
+            <div class="well well-lg feedback">
+              <h4>Rate this course</h4>
+              <div class="rating-container">
+                <rating class="ui-rating ui-rating-warning size-h3"
+                  value="course.my_rating"
+                  max="5"
+                  min="0"
+                  readonly="hasRated"
+                  ng-class="{'has-rated':hasRated}"
+                  state-on="'fa fa-star'"
+                  state-off="'fa fa-star-o'"></rating>
+              </div>
+              <h4>Evaluate the rigor</h4>
+              <div class="rigor-container">
+                <select class="form-control" ng-model="course.my_rigor" ng-options="rigor for rigor in validRigors">
+                  <option value="">-</option>
+                </select>
+              </div>
+              <!-- well -->
+            </div>
+            
             <!-- course_information -->
           </div>
         </div>
