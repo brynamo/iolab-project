@@ -232,23 +232,15 @@ h3.max-lines-3 { height: $font-size-h3*$headings-line-height*3; /* Fallback for 
   }
 }
 
-#course-detail {
-  // Rating
-  .rating-container {
-      margin-top: -5px;
-      // when active
-      .ui-rating .fa.fa-star {
-          color: $brand-warning;
-      }
-      .ui-rating &.has-rated .fa.fa-star {
-        color: $color-orange;
-      }
+#feedback-average {
+    .h4 {
+        margin-left: 25px;
+        margin-right: 10px;
+    }
+}
 
-      button {
-        margin-top: -5px;
-      }
-  }
-
+#course-description {
+    margin-top: 5px;
 }
 
 
@@ -301,6 +293,23 @@ $footer-height: $footer-logo-height + $footer-body-height + $footer-logo-inset;
         font-size: 14px;
         margin-left: 20px;
     }
+    .rating-container {
+        margin-left: 20px;
+    }
+    .ui-rating .fa.fa-star {
+        color: $brand-warning;
+    }
+    .ui-rating &.has-rated .fa.fa-star {
+        color: $color-orange;
+    }
+    .rigor-container {
+        width: 80px;
+        margin-left: 20px;
+    }
+}
+
+#course_information .well .feedback {
+    padding-top: 50px;
 }
 
 .breadcrumb {
